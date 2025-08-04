@@ -1,8 +1,8 @@
 import React from "react";
 
-const Footer = () => {
+const Footer = React.forwardRef((props, ref) => {
   return (
-    <div>
+    <div ref={ref}>
       <footer className="footer footer-horizontal footer-center bg-[#040025] text-primary-content p-10">
         <aside>
           <svg
@@ -63,6 +63,6 @@ const Footer = () => {
       </footer>
     </div>
   );
-};
+});
 
 export default Footer;

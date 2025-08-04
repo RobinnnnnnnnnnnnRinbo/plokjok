@@ -13,6 +13,7 @@ const HomePage = () => {
   const categoryRef = useRef();
   const productRef = useRef();
   const heroRef = useRef();
+  const aboutRef = useRef();
   return (
     <main>
       <NavBar
@@ -20,12 +21,13 @@ const HomePage = () => {
         categoryRef={categoryRef}
         heroRef={heroRef}
         cartCount={cartCount}
+        aboutRef={aboutRef}
       />
       <HeroSection ref={heroRef} />
       <Category ref={categoryRef} />
       <Brand />
-      <ProductList onAddToCart={handleAddToCart} />
-      <Footer />
+      <ProductList ref={productRef} onAddToCart={handleAddToCart} />
+      <Footer ref={aboutRef} />
     </main>
   );
 };
