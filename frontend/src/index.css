@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+body {
+  @apply bg-[#0A1F2B] text-gray-900;
+}
+
+@theme {
+  --color-pm: #040025;
+}
