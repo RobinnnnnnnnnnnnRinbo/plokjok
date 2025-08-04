@@ -8,7 +8,7 @@ const NavBar = ({ productRef, categoryRef, heroRef, cartCount }) => {
 
   return (
     <div className="w-full pt-4">
-      <nav className="bg-white flex p-6 md:mx-8 lg:mx-34 xl:mx-48 rounded-2xl justify-between">
+      <nav className="bg-white mx-2 flex items-center p-6 md:mx-8 lg:mx-34 xl:mx-48 rounded-2xl justify-between">
         <div className="">
           {/* DaisyUI Drawer */}
           <div className="drawer">
@@ -123,15 +123,16 @@ const NavBar = ({ productRef, categoryRef, heroRef, cartCount }) => {
             <p className="cursor-pointer">About</p>
           </div>
         </div>
-        <div className="flex mr-3 gap-8">
-          <img className="cursor-pointer" src={assets.searchM} alt="" />
-          <div className="relative mx-auto w-12 my-auto">
+
+        <div className="flex items-center justify-between gap-8">
+          <img className="cursor-pointer h-9" src={assets.search} alt="" />
+          <div className="relative mx-auto my-auto">
             <div className="bg-red-500 text-white absolute left-1/3 bottom-1/2 px-1.5 text-sm rounded-full">
               {cartCount}
             </div>
-            <img className="cursor-pointer" src={assets.cartM} alt="" />
+            <img className="cursor-pointer h-8" src={assets.cartM} alt="" />
           </div>
-          <img className="cursor-pointer" src={assets.userM} alt="" />
+          <img className="cursor-pointer h-8" src={assets.userM} alt="" />
         </div>
       </nav>
     </div>
