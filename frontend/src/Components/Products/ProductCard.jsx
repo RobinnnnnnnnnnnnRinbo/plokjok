@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { assets } from "../../assets/assets";
@@ -13,12 +14,14 @@ const ProductCard = ({ name, price, img, addToCart }) => {
             <img className="h-auto w-full" src={img} alt="" />
           </div>
           <div className="mx-2 -mb-4">
-            <button
-              onClick={addToCart}
-              className="bg-pm w-full p-2 flex justify-center rounded-xl"
-            >
-              <img className="h-6" src={assets.cartPlus} alt="" />
-            </button>
+            <Link to={"/detail"}>
+              <button
+                onClick={addToCart}
+                className="bg-pm w-full p-2 flex justify-center rounded-xl"
+              >
+                <img className="h-6" src={assets.cartPlus} alt="" />
+              </button>
+            </Link>
           </div>
         </div>
         <ProductPrice name={name} price={price} />
