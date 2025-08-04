@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon backend/server.js",
     "client": "cd frontend && npm run dev",
+    "build": "react-scripts build",
     "web": "nodemon backend/server.js & cd frontend && npm run dev"
   },
   "author": "",
