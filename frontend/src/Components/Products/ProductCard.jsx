@@ -4,8 +4,7 @@ import axios from "axios";
 import { assets } from "../../assets/assets";
 import ProductPrice from "./ProductPrice";
 
-const ProductCard = ({ name, price, img }) => {
-
+const ProductCard = ({ name, price, img, addToCart }) => {
   return (
     <div className="bg-white flex">
       <div className="m-6 flex-col">
@@ -14,7 +13,10 @@ const ProductCard = ({ name, price, img }) => {
             <img className="h-auto w-full" src={img} alt="" />
           </div>
           <div className="mx-2 -mb-4">
-            <button className="bg-pm w-full p-2 flex justify-center rounded-xl">
+            <button
+              onClick={addToCart}
+              className="bg-pm w-full p-2 flex justify-center rounded-xl"
+            >
               <img className="h-6" src={assets.cartPlus} alt="" />
             </button>
           </div>
