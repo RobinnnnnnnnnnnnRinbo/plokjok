@@ -7,8 +7,8 @@ const NavBar = ({ productRef, categoryRef, heroRef, cartCount }) => {
   };
 
   return (
-    <div className="w-full pt-4">
-      <nav className="bg-white mx-2 flex items-center p-6 md:mx-8 lg:mx-34 xl:mx-48 rounded-2xl justify-between">
+    <div className="mx-2 flex pt-4 justify-center">
+      <nav className="bg-white w-9/10 mx-2 shadow-lg fixed flex items-center p-6 md:mx-8 lg:mx-34 xl:mx-48 rounded-2xl justify-between">
         <div className="">
           {/* DaisyUI Drawer */}
           <div className="drawer">
