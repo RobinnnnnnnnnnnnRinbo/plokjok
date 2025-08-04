@@ -1,8 +1,8 @@
 import React from "react";
-import { assets } from "../assets/assets.js"; // Adjust the path as necessary
+import { assets } from "../assets/assets.js";
 
 const HeroSection = () => {
-  return <div className="text-white">Hello</div>;
+  return <div className="text-white h-screen bg-black "></div>;
 };
 
 export default HeroSection;

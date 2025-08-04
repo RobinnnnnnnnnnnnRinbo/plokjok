@@ -6,7 +6,7 @@ const Category = React.forwardRef((props, ref) => {
     <div
       ref={ref}
       {...props}
-      className="flex flex-col md:flex-row items-center justify-center bg-white mt-24"
+      className="flex flex-col md:flex-row items-center justify-center bg-white"
     >
       <div className="text-center md:text-start md:items-start md:ml-4 flex flex-col p-8 items-center">
         <p className="">Shop by</p>
