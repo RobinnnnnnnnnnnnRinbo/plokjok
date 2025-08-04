@@ -127,11 +127,12 @@ const NavBar = ({ productRef, categoryRef, heroRef, cartCount }) => {
 
         <div className="flex items-center justify-between gap-8">
           {isSearch ? (
-            <div className="flex justify-end items-center gap-4">
+            <div className="flex justify-end items-center gap-4 ">
               <input
-                className="w-2/3 outline-none bg-gray-100 text-sm p-2 px-3 rounded-full"
+                className="w-57/100 outline-none bg-gray-100 text-sm p-2 px-3 rounded-full"
                 type="text"
                 placeholder="Search items..."
+                autoFocus
               />
               <label onClick={() => setIsSearch((prev) => !prev)} htmlFor="">
                 x
