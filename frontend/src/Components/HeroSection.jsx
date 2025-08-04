@@ -2,9 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets.js";
 
-const HeroSection = () => {
+const HeroSection = React.forwardRef((props, ref) => {
   return (
-    <div className="text-white h-screen bg-black flex flex-col items-center gap-12">
+    <div
+      ref={ref}
+      className="text-white h-screen bg-black flex flex-col items-center gap-12"
+    >
       <div className="border rounded-full px-8 p-2 mt-12">New Arrival</div>
       <div className="flex h-[250px] w-full items-end relative">
         <div className="absolute left-5 lg:left-9">
@@ -25,6 +28,6 @@ const HeroSection = () => {
       </div>
     </div>
   );
-};
+});
 
 export default HeroSection;
