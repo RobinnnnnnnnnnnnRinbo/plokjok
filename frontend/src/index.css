@@ -2,7 +2,7 @@
 @plugin "daisyui";
 
 body {
-  @apply bg-[#0A1F2B] text-gray-900;
+  color: black;
 }
 
 @theme {

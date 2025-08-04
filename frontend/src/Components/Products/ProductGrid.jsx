@@ -1,58 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 
-const ProductGrid = ({ onAddToCart }) => {
-  const products = [
-    {
-      id: 1,
-      name: "Headset",
-      price: 29.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "Headset",
-      price: 29.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "Headset",
-      price: 29.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "Headset",
-      price: 29.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "Headset",
-      price: 29.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "Headset",
-      price: 29.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "Headset",
-      price: 29.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-  ];
+const ProductGrid = ({ onAddToCart, products }) => {
   return (
     <div className="bg-white">
       <div className="grid grid-cols-2 h-screen overflow-y-auto">
