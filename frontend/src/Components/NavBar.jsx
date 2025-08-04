@@ -8,9 +8,9 @@ const NavBar = ({ productRef, categoryRef, heroRef, cartCount }) => {
   };
 
   return (
-    <nav className="h-24 flex justify-center items-center">
-      <div className="bg-white fixed w-95/100 lg:w-3/4 shadow-lg fixed flex items-center p-6 rounded-2xl justify-between">
-        <div className="flex items-center gap-4 plg:gap-6">
+    <nav className="h-24 flex justify-center items-center bg-[#0A1F2B]">
+      <div className="bg-white fixed w-95/100 ts:w-5/6 shadow-lg fixed flex items-center p-6 rounded-2xl justify-between">
+        <div className="flex items-center gap-4 lg:gap-6">
           <img className="h-8" src={assets.menuM} alt="" />
           <span>LOGO</span>
         </div>
