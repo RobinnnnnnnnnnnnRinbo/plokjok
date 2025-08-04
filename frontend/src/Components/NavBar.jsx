@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { assets } from "../assets/assets.js"; // Adjust the path as necessary
 
 const NavBar = ({ productRef, categoryRef, heroRef, cartCount }) => {
+  const [isSearch, setIsSearch] = useState(false);
   const handleScroll = (ref) => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <div className="mx-2 flex pt-4 justify-center">
-      <nav className="bg-white w-9/10 mx-2 shadow-lg fixed flex items-center p-6 md:mx-8 lg:mx-34 xl:mx-48 rounded-2xl justify-between">
+      <nav className="bg-white h-[84px] w-9/10 mx-2 shadow-lg fixed flex items-center p-6 md:mx-8 lg:mx-34 xl:mx-48 rounded-2xl justify-between">
         <div className="">
           {/* DaisyUI Drawer */}
           <div className="drawer">
@@ -99,7 +100,7 @@ const NavBar = ({ productRef, categoryRef, heroRef, cartCount }) => {
           <p className="hidden cursor-pointer md:flex">Logo</p>
         </div>
         <div className="ml-[-64px] md:ml-0">
-          <p className="md:hidden cursor-pointer">LOGO</p>
+          {!isSearch && <p className="md:hidden cursor-pointer">LOGO</p>}
           <div className="hidden md:flex gap-8">
             <button
               className="cursor-pointer"
@@ -125,7 +126,26 @@ const NavBar = ({ productRef, categoryRef, heroRef, cartCount }) => {
         </div>
 
         <div className="flex items-center justify-between gap-8">
-          <img className="cursor-pointer h-9" src={assets.search} alt="" />
+          {isSearch ? (
+            <div className="flex justify-end items-center gap-4">
+              <input
+                className="w-2/3 outline-none bg-gray-100 text-sm p-2 px-3 rounded-full"
+                type="text"
+                placeholder="Search items..."
+              />
+              <label onClick={() => setIsSearch((prev) => !prev)} htmlFor="">
+                x
+              </label>
+            </div>
+          ) : (
+            <img
+              type="button"
+              className="cursor-pointer h-9"
+              src={assets.search}
+              alt=""
+              onClick={() => setIsSearch((prev) => !prev)}
+            />
+          )}
           <div className="relative mx-auto my-auto">
             <div className="bg-red-500 text-white absolute left-1/3 bottom-1/2 px-1.5 text-sm rounded-full">
               {cartCount}
