@@ -8,155 +8,19 @@ const NavBar = ({ productRef, categoryRef, heroRef, cartCount }) => {
   };
 
   return (
-    <div className="mx-2 flex pt-4 justify-center">
-      <nav className="bg-white h-[84px] w-9/10 mx-2 shadow-lg fixed flex items-center p-6 md:mx-8 lg:mx-34 xl:mx-48 rounded-2xl justify-between">
-        <div className="">
-          {/* DaisyUI Drawer */}
-          <div className="drawer">
-            <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content">
-              {/* Page content here */}
-              <label htmlFor="my-drawer">
-                <img
-                  className="md:hidden cursor-pointer"
-                  src={assets.menuM}
-                  alt=""
-                />
-              </label>
-            </div>
-            <div className="drawer-side">
-              <label
-                htmlFor="my-drawer"
-                aria-label="close sidebar"
-                className="drawer-overlay"
-              ></label>
-              <ul className="menu text-lg pt-10 bg-[#040025] text-base-content min-h-full w-80 p-4">
-                {/* Sidebar content here */}
-                <li>
-                  <button
-                    className="cursor-pointer"
-                    onClick={() => handleScroll(heroRef)}
-                  >
-                    Home
-                  </button>
-                </li>
-                <li>
-                  <div className="">
-                    <button
-                      className="cursor-pointer"
-                      onClick={() => handleScroll(categoryRef)}
-                    >
-                      Category
-                    </button>
-                    <div className="dropdown">
-                      <label tabIndex={0} className="cursor-pointer">
-                        <img
-                          className="rotate-90 active:rotate-0 pl-4 absolute bottom-1/2 active:bottom- h-3"
-                          src={assets.dropdown}
-                          alt=""
-                        />
-                      </label>
-                      <ul
-                        tabIndex={0}
-                        className="menu dropdown-content bg-base-100 rounded-box z-1 w-40 p-2 shadow-sm"
-                      >
-                        <li>
-                          <a>Mice</a>
-                        </li>
-                        <li>
-                          <a>Keyboards</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <button
-                    className="cursor-pointer"
-                    onClick={() => handleScroll(productRef)}
-                  >
-                    Product
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="cursor-pointer"
-                    onClick={() => handleScroll(productRef)}
-                  >
-                    Product
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="cursor-pointer"
-                    onClick={() => handleScroll(productRef)}
-                  >
-                    Product
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <p className="hidden cursor-pointer md:flex">Logo</p>
+    <nav className="h-24 flex justify-center items-center">
+      <div className="bg-white fixed w-95/100 lg:w-3/4 shadow-lg fixed flex items-center p-6 rounded-2xl justify-between">
+        <div className="flex items-center gap-4 plg:gap-6">
+          <img className="h-8" src={assets.menuM} alt="" />
+          <span>LOGO</span>
         </div>
-        <div className="ml-[-64px] md:ml-0">
-          {!isSearch && <p className="md:hidden cursor-pointer">LOGO</p>}
-          <div className="hidden md:flex gap-8">
-            <button
-              className="cursor-pointer"
-              onClick={() => handleScroll(heroRef)}
-            >
-              Home
-            </button>
-            <button
-              className="cursor-pointer"
-              onClick={() => handleScroll(categoryRef)}
-            >
-              Category
-            </button>
-            <button
-              className="cursor-pointer"
-              onClick={() => handleScroll(productRef)}
-            >
-              Product
-            </button>
-            <p className="cursor-pointer">About</p>
-            <p className="cursor-pointer">About</p>
-          </div>
+        <div className="flex items-center gap-4 lg:gap-6">
+          <img className="h-8" src={assets.search} alt="" />
+          <img className="h-8" src={assets.cartM} alt="" />
+          <img className="h-8" src={assets.userM} alt="" />
         </div>
-
-        <div className="flex items-center justify-between gap-8">
-          {isSearch ? (
-            <div className="flex justify-end items-center gap-4 ">
-              <input
-                className="w-57/100 outline-none bg-gray-100 text-md p-2 px-3 rounded-full"
-                type="text"
-                placeholder="Search items..."
-                autoFocus
-              />
-              <label onClick={() => setIsSearch((prev) => !prev)} htmlFor="">
-                x
-              </label>
-            </div>
-          ) : (
-            <img
-              type="button"
-              className="cursor-pointer h-9"
-              src={assets.search}
-              alt=""
-              onClick={() => setIsSearch((prev) => !prev)}
-            />
-          )}
-          <div className="relative mx-auto my-auto">
-            <div className="bg-red-500 text-white absolute left-1/3 bottom-1/2 px-1.5 text-sm rounded-full">
-              {cartCount}
-            </div>
-            <img className="cursor-pointer h-8" src={assets.cartM} alt="" />
-          </div>
-          <img className="cursor-pointer h-8" src={assets.userM} alt="" />
-        </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
   );
 };
 
