@@ -6,10 +6,7 @@ import Brand from "../Components/Brand";
 import Footer from "../Components/Footer";
 import ProductList from "../Components/ProductList";
 
-const HomePage = () => {
-  const [cartCount, setCartCount] = useState(0);
-  const handleAddToCart = () => setCartCount((c) => c + 1);
-
+const HomePage = ({ cartCount, handleAddToCart }) => {
   const categoryRef = useRef();
   const productRef = useRef();
   const heroRef = useRef();

@@ -13,7 +13,7 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef, cartCount }) => {
 
   return (
     <div className="h-28 flex justify-center items-center bg-transparent">
-      <div className="bg-white h-22 z-50 w-95/100 ts:w-5/6  shadow-lg flex items-center p-6 rounded-2xl justify-between">
+      <div className="bg-white h-22 fixed z-50 w-95/100 ts:w-5/6  shadow-lg flex items-center p-6 rounded-2xl justify-between">
         <div className="flex items-center gap-4 lg:gap-6">
           <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
