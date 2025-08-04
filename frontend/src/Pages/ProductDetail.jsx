@@ -7,7 +7,7 @@ const ProductDetail = () => {
   return (
     <div className="bg-white h-screen flex flex-col justify-between">
       <NavBar />
-      <div className="h-4/10 bg-pm mx-4"></div>
+      <div className="h-3/10 bg-pm mx-4"></div>
       <div className="h-1/10 flex gap-3 px-4">
         <div className="bg-green-200 h-full w-1/4"></div>
         <div className="bg-green-200 h-full w-1/4"></div>
@@ -28,7 +28,7 @@ const ProductDetail = () => {
       <div className="flex px-4">
         <ColorSelector />
       </div>
-      <div className="flex gap-2 my-8 px-4">
+      <div className="flex gap-2 mb-18 px-4">
         <button className="border w-5/8 p-3 rounded-xl">ADD TO CART</button>
         <button className="bg-pm w-full text-white rounded-xl active:bg-white">
           BUY NOW
