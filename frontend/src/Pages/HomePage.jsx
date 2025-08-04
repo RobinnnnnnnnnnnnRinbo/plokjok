@@ -24,7 +24,7 @@ const HomePage = () => {
       <HeroSection ref={heroRef} />
       <Category ref={categoryRef} />
       <Brand />
-      <ProductList />
+      <ProductList onAddToCart={handleAddToCart} />
       <Footer />
     </main>
   );
