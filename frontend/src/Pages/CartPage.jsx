@@ -1,9 +1,10 @@
 import React from "react";
+import NavBar from "../Components/NavBar";
 
-const CartPage = () => {
+const CartPage = ({ cartCount, handleAddToCart, setAddToCart }) => {
   return (
-    <div className="bg-pm h-screen flex items-center justify-center text-white">
-      CartPage
+    <div className="h-screen">
+      <NavBar cartCount={cartCount} />
     </div>
   );
 };

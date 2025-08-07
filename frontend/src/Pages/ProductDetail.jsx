@@ -1,54 +1,81 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
 import ColorSelector from "../Components/ProductDetail/ColorOption";
 import NavBar from "../Components/NavBar";
 
-const ProductDetail = ({ handleAddToCart }) => {
+const ProductDetail = ({ handleAddToCart, cartCount, setCartCount }) => {
+  const [quantity, setQuantity] = useState(1);
+
+  function handleQuantity(value) {
+    if (value === "add") setQuantity((prev) => prev + 1);
+    if (value === "minus") setQuantity((prev) => prev - 1);
+  }
+
   return (
     <div className="bg-white h-screen flex flex-col gap-8">
-      <Link to={"/"}>
-        <button className="self-start px-4 flex mt-6 gap-2 items-center">
-          <img className="h-4" src={assets.back} alt="" />
-          Go back
-        </button>
-      </Link>
+      <NavBar cartCount={cartCount} />
+      <div className="flex flex-col h-full gap-8 mt-18">
+        <div className="h-3/10 bg-pm mx-4"></div>
+        <div className="h-1/10 -mt-5 flex gap-3 px-4">
+          <div className="bg-green-200 h-full w-1/4"></div>
+          <div className="bg-green-200 h-full w-1/4"></div>
+          <div className="bg-green-200 h-full w-1/4"></div>
+          <div className="bg-green-200 h-full w-1/4"></div>
+        </div>
+        <div className="flex justify-between items-center px-4">
+          <div className="">
+            <span className="text-lg">Product Name</span>
+            <div className="flex items-center gap-2">
+              <img className="h-4" src={assets.star} alt="" />
+              <span className="text-xs">4.5/5</span>
+              <span className="italic text-gray-500 text-[10px] underline">
+                168 - Reviews
+              </span>
+            </div>
+          </div>
+          <span className="font-semibold text-lg">$923.23</span>
+        </div>
+        <div className="w-full ">
+          <span className="px-4">Description:</span>
+          <p className="text-sm px-8 italic text-gray-500">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. veniam
+            ipsam delectus, officia
+          </p>
+        </div>
 
-      <div className="h-3/10 bg-pm mx-4"></div>
-      <div className="h-1/10 flex gap-3 px-4">
-        <div className="bg-green-200 h-full w-1/4"></div>
-        <div className="bg-green-200 h-full w-1/4"></div>
-        <div className="bg-green-200 h-full w-1/4"></div>
-        <div className="bg-green-200 h-full w-1/4"></div>
-      </div>
-      <div className="flex justify-between items-center px-4">
-        <span className="text-lg">Product Name</span>
-        <span className="font-semibold text-lg">$923.23</span>
-      </div>
-      <div className="flex items-center gap-2 px-4">
-        <img className="h-6" src={assets.star} alt="" />
-        <span>4.5/5</span>
-        <span className="italic text-gray-500 text-xs underline">
-          168 - Reviews
-        </span>
-      </div>
-      <div className="flex px-4">
-        <ColorSelector />
-      </div>
-
-      <div className="fixed bottom-0 left-0 h-16 z-50 w-full bg-white ">
-        <div className="flex mx-4 gap-3 justify-between">
-          <Link to={"/"}>
-            <button
-              onClick={handleAddToCart}
-              className="p-3 border rounded-lg text-sm"
-            >
-              ADD TO CART
+        <div className="flex px-4">
+          <ColorSelector />
+        </div>
+        <div className="fixed bottom-4 left-0 h-16 z-50 w-full bg-white flex">
+          <div className="w-1/2 flex items-center justify-evenly">
+            <button onClick={() => handleQuantity("minus")}>
+              <img className="h-8" src={assets.minus} alt="" />
             </button>
-          </Link>
-          <button className="w-3/5 text-sm border rounded-lg bg-pm text-white">
-            BUY NOW
-          </button>
+            <input
+              onChange={(e) => setQuantity(Number(e.target.value))}
+              value={Number(quantity)}
+              className="w-[25px] text-center outline-none"
+              type="text"
+            />
+
+            <button onClick={() => handleQuantity("add")}>
+              <img className="h-8" src={assets.plus} alt="" />
+            </button>
+          </div>
+          <div className="flex gap-3 justify-evenly items-center">
+            <Link to={"/"}>
+              <button
+                onClick={() => handleAddToCart(quantity)}
+                className="border text-sm flex items-center justify-center"
+              >
+                <img className="p-4" src={assets.cart} alt="" />
+              </button>
+            </Link>
+            <button className="text-sm p-4 border bg-pm text-white">
+              BUY NOW
+            </button>
+          </div>
         </div>
       </div>
     </div>

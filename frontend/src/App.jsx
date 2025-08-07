@@ -11,7 +11,7 @@ import SignUp from "./Pages/SignUp.jsx";
 
 const App = () => {
   const [cartCount, setCartCount] = useState(0);
-  const handleAddToCart = () => setCartCount((c) => c + 1);
+  const handleAddToCart = (qty = 1) => setCartCount((c) => c + Number(qty));
   const router = createBrowserRouter([
     {
       path: "/",
@@ -29,7 +29,13 @@ const App = () => {
     },
     {
       path: "/cart",
-      element: <NotFoundPage />,
+      element: (
+        <CartPage
+          cartCount={cartCount}
+          handleAddToCart={handleAddToCart}
+          setCartCount={setCartCount}
+        />
+      ),
     },
     {
       path: "/signup",
