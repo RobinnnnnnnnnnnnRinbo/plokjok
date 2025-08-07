@@ -70,13 +70,7 @@ const ProductList = React.forwardRef(({ onAddToCart }, ref) => {
     sortedProducts = products.sort((a, b) => b.price - a.price);
 
   return (
-    <div>
-      <div
-        ref={ref}
-        className="h-16 bg-[#040025] text-white text-sm flex items-center font-bold justify-center"
-      >
-        Products
-      </div>
+    <div ref={ref}>
       <FilterOption sortBy={sortBy} setSortBy={setSortBy} />
       <ProductGrid onAddToCart={onAddToCart} products={sortedProducts} />
     </div>

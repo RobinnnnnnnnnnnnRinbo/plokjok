@@ -18,7 +18,7 @@ const Category = React.forwardRef((props, ref) => {
       <div className="grid grid-cols-2 gap-4 place-items-center mb-18 md:flex md:mt-18 md:pr-12">
         <div className="bg-[#ededed] rounded-xl p-18 h-[175px] w-[150px] flex flex-col justify-center items-center md:max-w-[70px]">
           <img
-            className="min-h-[120px] min-w-[100px] hover:min-w-[120px] cursor-pointer duration-300 max-w-full max-h-full object-contain"
+            className="min-h-[120px] min-w-[100px] active:min-w-[120px] hover:min-w-[120px] cursor-pointer duration-300 max-w-full max-h-full object-contain"
             src={assets.mousecateg}
             alt=""
           />
@@ -26,7 +26,7 @@ const Category = React.forwardRef((props, ref) => {
         </div>
         <div className="bg-[#ededed] rounded-xl p-18 h-[175px] w-[150px] md:w-[70px] flex flex-col justify-center items-center md:max-w-[70px]">
           <img
-            className="min-h-[120px] min-w-[80px] hover:min-w-[100px] cursor-pointer duration-300 max-w-full max-h-full object-contain"
+            className="min-h-[120px] min-w-[80px] active:min-w-[100px] hover:min-w-[100px] cursor-pointer duration-300 max-w-full max-h-full object-contain"
             src={assets.keyboardcateg}
             alt=""
           />
@@ -34,7 +34,7 @@ const Category = React.forwardRef((props, ref) => {
         </div>
         <div className="bg-[#ededed] rounded-xl p-18 h-[175px] w-[150px] md:w-[70px] flex flex-col justify-center items-center md:max-w-[70px]">
           <img
-            className="min-h-[120px] min-w-[80px] hover:min-w-[100px] cursor-pointer duration-300 max-w-full max-h-full object-contain"
+            className="min-h-[120px] min-w-[80px] active:min-w-[100px] hover:min-w-[100px] cursor-pointer duration-300 max-w-full max-h-full object-contain"
             src={assets.controllercateg}
             alt=""
           />
@@ -42,7 +42,7 @@ const Category = React.forwardRef((props, ref) => {
         </div>
         <div className="bg-[#ededed] rounded-xl p-18 h-[175px] w-[150px] md:w-[70px] flex flex-col justify-center items-center md:max-w-[70px]">
           <img
-            className="min-h-[120px] min-w-[80px] hover:min-w-[100px] cursor-pointer duration-300 max-w-full max-h-full object-contain"
+            className="min-h-[120px] min-w-[80px] active:min-w-[100px] hover:min-w-[100px] cursor-pointer duration-300 max-w-full max-h-full object-contain"
             src={assets.nukecateg}
             alt=""
           />

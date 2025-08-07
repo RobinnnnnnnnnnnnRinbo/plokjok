@@ -6,7 +6,7 @@ const HeroSection = React.forwardRef((props, ref) => {
   return (
     <div
       ref={ref}
-      className="text-white h-screen bg-black flex flex-col items-center gap-12"
+      className="mt-18 text-white h-screen bg-black flex flex-col items-center gap-12"
     >
       <div className="border rounded-full px-8 p-2 mt-12">New Arrival</div>
       <div className="flex h-[250px] w-full items-end relative">
@@ -19,7 +19,7 @@ const HeroSection = React.forwardRef((props, ref) => {
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
       </p>
       <div className="flex flex-col gap-5">
-        <Link to={"/cart"}>
+        <Link to={"/detail"}>
           <button className="bg-white text-pm rounded-full p-3 px-6">
             Shop Now
           </button>
