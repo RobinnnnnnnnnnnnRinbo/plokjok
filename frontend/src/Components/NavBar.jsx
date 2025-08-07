@@ -12,8 +12,8 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef, cartCount }) => {
   };
 
   return (
-    <div className="h-28 flex justify-center items-center bg-transparent">
-      <div className="bg-white h-22 fixed z-50 w-95/100 ts:w-5/6  shadow-lg flex items-center p-6 rounded-2xl justify-between">
+    <div className="flex bg-transparent">
+      <div className="bg-white fixed z-50 w-full flex items-center p-6 justify-between">
         <div className="flex items-center gap-4 lg:gap-6">
           <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -40,7 +40,7 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef, cartCount }) => {
                     onClick={() => handleScroll(heroRef)}
                     className="bg-white text-pm font-semibold rounded-lg"
                   >
-                    <a>Home</a>
+                    <span>Home</span>
                   </li>
                 </Link>
                 <li
@@ -94,7 +94,7 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef, cartCount }) => {
             <div className="w-2/3 flex bg-gray-100 rounded-full items-center">
               <input
                 type="text"
-                className="outline-none w-86/100 p-2 px-3"
+                className="outline-none w-86/100 px-2 p-1 px-3"
                 placeholder="Search products..."
                 autoFocus
               />
@@ -110,7 +110,7 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef, cartCount }) => {
             <img
               type="button"
               onClick={() => setIsSearch((prev) => !prev)}
-              className="h-8"
+              className="h-7"
               src={assets.search}
               alt=""
             />
@@ -120,11 +120,11 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef, cartCount }) => {
               {cartCount}
             </div>
             <Link to={"/cart"}>
-              <img type="button" className="h-8" src={assets.cartM} alt="" />
+              <img type="button" className="h-7" src={assets.cartM} alt="" />
             </Link>
           </div>
-          <Link to={"/user"}>
-            <img type="button" className="h-8" src={assets.userM} alt="" />
+          <Link to={"/login"}>
+            <img type="button" className="h-7" src={assets.userM} alt="" />
           </Link>
         </div>
       </div>

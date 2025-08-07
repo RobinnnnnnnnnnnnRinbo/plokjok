@@ -6,6 +6,7 @@ import CartPage from "./Pages/CartPage.jsx";
 import NotFoundPage from "./Pages/NotFoundPage.jsx";
 import ProductDetail from "./Pages/ProductDetail.jsx";
 import ProductList from "./Components/ProductList.jsx";
+import LogIn from "./Pages/LogIn.jsx";
 
 const App = () => {
   const [cartCount, setCartCount] = useState(0);
@@ -22,13 +23,14 @@ const App = () => {
       ),
     },
     {
-      path: "/user",
-      element: <NotFoundPage />,
+      path: "/login",
+      element: <LogIn />,
     },
     {
       path: "/cart",
       element: <NotFoundPage />,
     },
+
     {
       path: "/detail/*",
       element: (
