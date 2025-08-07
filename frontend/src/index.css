@@ -10,6 +10,7 @@ body {
 
 @theme {
   --color-pm: #040025;
+  --color-pmhover: #504a91;
   --breakpoint-sm: 23.4375rem; /* iPhone 11 Pro (~375px) */
   --breakpoint-lg: 25.75rem; /* Galaxy Note 20 Ultra (~412px) */
   --breakpoint-ts: 50.625rem; /* iPad 10.2" (~810px) */

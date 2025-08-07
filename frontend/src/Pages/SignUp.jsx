@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { assets } from "../assets/assets";
 import { Link } from "react-router-dom";
-import InputEmail from "../Components/LogIn/InputEmail";
-import InputPassword from "../Components/LogIn/InputPassword";
+import Input from "../Components/LogIn/Input";
+
 import LogInButton from "../Components/LogIn/LogInButton";
 import AuthButton from "../Components/LogIn/AuthButton";
 
-const SignUp = () => {
+const SignUp = ({
+  usernameInput,
+  setUsernameInput,
+  passwordInput,
+  setPasswordInput,
+}) => {
+  function handleSubmit(e) {
+    e.preventDefault();
+    passwordValidation();
+  }
+
+  function passwordValidation() {
+    if (!passwordRegex.test(passwordInput)) {
+    }
+  }
+
+  function passwordConfirmation() {}
+
   return (
     <div className="flex bg-white flex-col h-screen">
       <Link to={"/"}>
@@ -15,7 +32,7 @@ const SignUp = () => {
           Back
         </button>
       </Link>
-      <div className="bg-pm min-h-[35vh] w-full flex flex-col justify-center items-center rounded-b-[12vh]">
+      <div className="bg-pm min-h-[30vh] w-full flex flex-col justify-center items-center rounded-b-[12vh]">
         <span className="text-2xl pt-18 font-extrabold text-white">
           Create an account
         </span>
@@ -23,38 +40,54 @@ const SignUp = () => {
           Let's get logged in and continue your shopping.
         </span>
       </div>
-      <form className="bg-white flex flex-col items-center gap-4 mt-4">
-        <InputEmail
+      <form className="bg-white flex flex-col items-center relative gap-5 mt-4">
+        <Input
+          username={true}
+          type="text"
+          icon={assets.user}
+          placeholder="Username"
+          setPasswordInput={setPasswordInput}
+          setUsernameInput={setUsernameInput}
+        />
+        <Input
+          username={true}
           type="email"
           icon={assets.user}
-          placeholder="Username or email address"
+          placeholder="Email address"
+          setPasswordInput={setPasswordInput}
+          setUsernameInput={setUsernameInput}
         />
-        <InputEmail
+        <Input
           showPass={true}
           type="password"
           icon={assets.lock}
           placeholder="Password"
+          setPasswordInput={setPasswordInput}
+          setUsernameInput={setUsernameInput}
         />
-        <InputEmail
+
+        <Input
           showPass={true}
           type="password"
           icon={assets.lock}
           placeholder="Confirm password"
+          setPasswordInput={setPasswordInput}
+          setUsernameInput={setUsernameInput}
         />
 
         <LogInButton prop="SIGN UP" />
         <div className="flex w-[75vw] h-5 justify-center">
-          <span className="text-gray-500">or continue with</span>
+          <span className="text-gray-500 text-sm">or continue with</span>
         </div>
         <div className="flex gap-2 w-[75vw]">
           <AuthButton icon={assets.google} />
           <AuthButton icon={assets.ig} />
           <AuthButton icon={assets.fb} />
         </div>
-        <span>
+        <span className="text-sm">
           Already have an account?{" "}
           <Link to={"/login"}>
-            <a className="text-blue-600">Log In</a>
+            <span className="text-blue-600">Log In</span>
           </Link>
         </span>
       </form>

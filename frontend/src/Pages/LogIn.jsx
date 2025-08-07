@@ -1,12 +1,17 @@
 import React from "react";
 import { assets } from "../assets/assets";
 import { Link } from "react-router-dom";
-import InputEmail from "../Components/LogIn/InputEmail";
-import InputPassword from "../Components/LogIn/InputPassword";
+import Input from "../Components/LogIn/Input";
 import LogInButton from "../Components/LogIn/LogInButton";
 import AuthButton from "../Components/LogIn/AuthButton";
 
-const LogIn = () => {
+const LogIn = ({
+  usernameInput,
+  setUsernameInput,
+  passwordInput,
+  setPasswordInput,
+  handleSubmit,
+}) => {
   return (
     <div className="flex bg-white flex-col h-screen">
       <Link to={"/"}>
@@ -23,17 +28,25 @@ const LogIn = () => {
           Let's get logged in and continue your shopping.
         </span>
       </div>
-      <form className="bg-white flex flex-col items-center gap-4 mt-4">
-        <InputEmail
+      <form
+        onClick={handleSubmit}
+        className="bg-white flex flex-col items-center gap-4 mt-4"
+      >
+        <Input
+          username={true}
           type="email"
           icon={assets.user}
           placeholder="Username or email address"
+          setPasswordInput={setPasswordInput}
+          setUsernameInput={setUsernameInput}
         />
-        <InputEmail
+        <Input
           showPass={true}
           type="password"
           icon={assets.lock}
           placeholder="Password"
+          setPasswordInput={setPasswordInput}
+          setUsernameInput={setUsernameInput}
         />
         <div className="w-[75vw] flex justify-between">
           <div>
@@ -42,9 +55,9 @@ const LogIn = () => {
           </div>
           <a className="text-blue-600 text-sm">Forgot password?</a>
         </div>
-        
-          <LogInButton prop="LOG IN" />
-        
+
+        <LogInButton prop="LOG IN" />
+
         <div className="flex w-[75vw] justify-center">
           <span className="text-gray-500 text-sm">or continue with</span>
         </div>
@@ -56,7 +69,7 @@ const LogIn = () => {
         <span className="text-sm">
           Don't have an account?
           <Link to={"/signup"}>
-            <a className="text-blue-600 px-2">Register now</a>
+            <span className="text-blue-600 px-2">Register now</span>
           </Link>
         </span>
       </form>
