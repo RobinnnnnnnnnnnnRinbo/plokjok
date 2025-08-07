@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import { assets } from "../../assets/assets";
 
-const InputEmail = ({ placeholder, icon, showPass, type }) => {
+const Input = ({
+  placeholder,
+  icon,
+  type,
+  showPass,
+  usernameInput,
+  setUsernameInput,
+  passwordInput,
+  setPasswordInput,
+}) => {
   const [onInput, setOnInput] = useState(true);
-  const [input, setInput] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -12,20 +20,29 @@ const InputEmail = ({ placeholder, icon, showPass, type }) => {
 
   return (
     <div className="flex relative">
-      {onInput && (
-        <img className="absolute top-35/100 left-4" src={icon} alt="" />
-      )}
+      <img
+        className={`transition-opacity duration-100 absolute top-1/2 left-4 h-4 -translate-y-1/2 ${
+          onInput ? `opacity-100` : `opacity-0`
+        }`}
+        src={icon}
+        alt=""
+      />
+
       <input
         onChange={(e) => {
-          setInput(e.target.value);
+          if (type === "password") {
+            setPasswordInput(e.target.value);
+          } else {
+            setUsernameInput(e.target.value);
+          }
         }}
-        onFocus={() => setOnInput((prev) => !prev)}
-        onBlur={() => setOnInput((prev) => !prev)}
-        className={`bg-[#ededed] h-[50px] w-[75vw] ${
-          onInput ? `pl-10` : `pl-3`
+        onFocus={() => setOnInput(false)}
+        onBlur={() => setOnInput(true)}
+        className={`bg-[#ededed] h-[50px] outline-none w-[75vw] ${
+          onInput ? `pl-10 duration-100` : `pl-3 duration-100`
         } rounded-xl`}
         type={type === "password" && !passwordVisible ? "password" : "text"}
-        value={input}
+        value={type === "password" ? passwordInput : usernameInput}
         placeholder={placeholder}
       />
       {showPass &&
@@ -46,4 +63,4 @@ const InputEmail = ({ placeholder, icon, showPass, type }) => {
   );
 };
 
-export default InputEmail;
+export default Input;
