@@ -38,23 +38,25 @@ const LogIn = () => {
         <div className="w-[75vw] flex justify-between">
           <div>
             <input type="checkbox" />
-            <span className="pl-2">Rememer me</span>
+            <span className="pl-2 text-sm">Rememer me</span>
           </div>
-          <a className="text-blue-600">Forgot password?</a>
+          <a className="text-blue-600 text-sm">Forgot password?</a>
         </div>
-        <LogInButton prop="LOG IN" />
-        <div className="flex w-[75vw] h-5 justify-center">
-          <span className="text-gray-500">or continue with</span>
+        
+          <LogInButton prop="LOG IN" />
+        
+        <div className="flex w-[75vw] justify-center">
+          <span className="text-gray-500 text-sm">or continue with</span>
         </div>
         <div className="flex gap-2 w-[75vw]">
           <AuthButton icon={assets.google} />
           <AuthButton icon={assets.ig} />
           <AuthButton icon={assets.fb} />
         </div>
-        <span>
-          Don't have an account?{" "}
+        <span className="text-sm">
+          Don't have an account?
           <Link to={"/signup"}>
-            <a className="text-blue-600">Register now</a>
+            <a className="text-blue-600 px-2">Register now</a>
           </Link>
         </span>
       </form>
