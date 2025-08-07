@@ -7,9 +7,9 @@ import ProductPrice from "./ProductPrice";
 
 const ProductCard = ({ name, price, img, addToCart }) => {
   return (
-    <div className="bg-white flex">
-      <div className="m-6 flex-col">
-        <div className="bg-gradient-to-t from-[#8686B0] rounded-2xl min-h-60 max-w-48 flex flex-col justify-evenly">
+    <div className="bg-white flex max-h-124">
+      <div className="flex-col">
+        <div className="bg-gradient-to-t from-[#8686B0] rounded-2xl min-h-60 max-w-40 flex flex-col justify-evenly">
           <Link to={"/detail"}>
             <div>
               <img className="h-auto w-full" src={img} alt="" />

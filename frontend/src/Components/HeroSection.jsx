@@ -15,7 +15,7 @@ const HeroSection = React.forwardRef((props, ref) => {
         </div>
         <div className="h-1/2 bg-white w-full text-white">h</div>
       </div>
-      <p className="px-8 -mt-3 text-center text-3xl font-bold">
+      <p className="px-8 -mt-3 text-center max-w-[375px] text-3xl font-bold">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
       </p>
       <div className="flex flex-col gap-5">
