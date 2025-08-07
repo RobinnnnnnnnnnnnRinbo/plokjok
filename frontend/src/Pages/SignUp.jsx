@@ -6,7 +6,7 @@ import InputPassword from "../Components/LogIn/InputPassword";
 import LogInButton from "../Components/LogIn/LogInButton";
 import AuthButton from "../Components/LogIn/AuthButton";
 
-const LogIn = () => {
+const SignUp = () => {
   return (
     <div className="flex bg-white flex-col h-screen">
       <Link to={"/"}>
@@ -17,7 +17,7 @@ const LogIn = () => {
       </Link>
       <div className="bg-pm min-h-[35vh] w-full flex flex-col justify-center items-center rounded-b-[12vh]">
         <span className="text-2xl pt-18 font-extrabold text-white">
-          Welcome back,
+          Create an account
         </span>
         <span className="text-white mx-24 text-sm text-center">
           Let's get logged in and continue your shopping.
@@ -35,14 +35,14 @@ const LogIn = () => {
           icon={assets.lock}
           placeholder="Password"
         />
-        <div className="w-[75vw] flex justify-between">
-          <div>
-            <input type="checkbox" />
-            <span className="pl-2">Rememer me</span>
-          </div>
-          <a className="text-blue-600">Forgot password?</a>
-        </div>
-        <LogInButton prop="LOG IN" />
+        <InputEmail
+          showPass={true}
+          type="password"
+          icon={assets.lock}
+          placeholder="Confirm password"
+        />
+
+        <LogInButton prop="SIGN UP" />
         <div className="flex w-[75vw] h-5 justify-center">
           <span className="text-gray-500">or continue with</span>
         </div>
@@ -52,9 +52,9 @@ const LogIn = () => {
           <AuthButton icon={assets.fb} />
         </div>
         <span>
-          Don't have an account?{" "}
-          <Link to={"/signup"}>
-            <a className="text-blue-600">Register now</a>
+          Already have an account?{" "}
+          <Link to={"/login"}>
+            <a className="text-blue-600">Log In</a>
           </Link>
         </span>
       </form>
@@ -62,4 +62,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default SignUp;

@@ -7,6 +7,7 @@ import NotFoundPage from "./Pages/NotFoundPage.jsx";
 import ProductDetail from "./Pages/ProductDetail.jsx";
 import ProductList from "./Components/ProductList.jsx";
 import LogIn from "./Pages/LogIn.jsx";
+import SignUp from "./Pages/SignUp.jsx";
 
 const App = () => {
   const [cartCount, setCartCount] = useState(0);
@@ -29,6 +30,10 @@ const App = () => {
     {
       path: "/cart",
       element: <NotFoundPage />,
+    },
+    {
+      path: "/signup",
+      element: <SignUp />,
     },
 
     {
