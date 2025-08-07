@@ -6,7 +6,7 @@ const HeroSection = React.forwardRef((props, ref) => {
   return (
     <div
       ref={ref}
-      className="mt-18 text-white h-screen bg-black flex flex-col items-center gap-12"
+      className="pt-18 text-white h-screen bg-black flex flex-col items-center gap-12"
     >
       <div className="border rounded-full px-8 p-2 mt-12">New Arrival</div>
       <div className="flex h-[250px] w-full items-end relative">
