@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 
-const ProductGrid = ({ handleAddToCart, products, loading, error }) => {
+const ProductGrid = ({
+  handleAddToCart,
+  products,
+  loading,
+  error,
+
+  setSelectedProduct,
+}) => {
   return (
     <div className="bg-white">
       <div className="flex flex-wrap h-screen justify-center gap-6 overflow-y-auto">
@@ -11,6 +18,8 @@ const ProductGrid = ({ handleAddToCart, products, loading, error }) => {
         {error && <span>{error}</span>}
         {products.map((item, index) => (
           <ProductCard
+            item={item}
+            setSelectedProduct={setSelectedProduct}
             handleAddToCart={handleAddToCart}
             key={index}
             name={item.name}

@@ -4,7 +4,17 @@ import FilterOption from "./Products/FilterOption";
 import axios from "axios";
 
 const ProductList = React.forwardRef(
-  ({ handleAddToCart, products, fetchProducts, loading }, ref) => {
+  (
+    {
+      handleAddToCart,
+      products,
+      fetchProducts,
+      loading,
+      selectedProduct,
+      setSelectedProduct,
+    },
+    ref
+  ) => {
     const [sortBy, setSortBy] = useState("name");
 
     useEffect(() => {
@@ -31,6 +41,8 @@ const ProductList = React.forwardRef(
           loading={loading}
           handleAddToCart={handleAddToCart}
           products={sortedProducts}
+          selectedProduct={selectedProduct}
+          setSelectedProduct={setSelectedProduct}
         />
       </div>
     );

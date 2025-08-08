@@ -15,6 +15,8 @@ const HomePage = ({
   setLoading,
   error,
   setError,
+  selectedProduct,
+  setSelectedProduct,
 }) => {
   const categoryRef = useRef();
   const productRef = useRef();
@@ -37,10 +39,13 @@ const HomePage = ({
         setLoading={setLoading}
         error={error}
         setError={setError}
+        setSelectedProduct={setSelectedProduct}
+        selectedProduct={selectedProduct}
+        cartCount={cartCount}
+        handleAddToCart={handleAddToCart}
         products={products}
         ref={productRef}
         fetchProducts={fetchProducts}
-        handleAddToCart={handleAddToCart}
       />
       <Footer ref={aboutRef} />
     </>

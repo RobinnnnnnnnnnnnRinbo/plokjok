@@ -5,13 +5,23 @@ import axios from "axios";
 import { assets } from "../../assets/assets";
 import ProductPrice from "./ProductPrice";
 
-const ProductCard = ({ name, price, img, handleAddToCart }) => {
+const ProductCard = ({
+  name,
+  price,
+  img,
+  item,
+ 
+  setSelectedProduct,
+}) => {
+  function handleSelectProduct() {
+    setSelectedProduct(item);
+  }
   return (
     <div className="bg-white flex max-h-124">
       <div className="flex-col">
         <div className="bg-gradient-to-t from-[#8686B0] rounded-2xl min-h-60 max-w-40 flex flex-col justify-evenly">
           <Link to={"/detail"}>
-            <div>
+            <div onClick={handleSelectProduct}>
               <img className="h-auto w-full" src={img} alt="" />
             </div>
           </Link>

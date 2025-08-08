@@ -21,6 +21,70 @@ const App = () => {
   const [error, setError] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  const product = [
+    {
+      id: 1,
+      name: "Sample Product",
+      img_url: "https://via.placeholder.com/150",
+      price: 19.99,
+      description: "This is a sample product description.",
+      category: "Sample Category",
+      stock: 100,
+      rating: 4.5,
+    },
+    {
+      id: 2,
+      name: "Sample Product 2",
+      img_url: "https://via.placeholder.com/150",
+      price: 29.99,
+      description: "This is another sample product description.",
+      category: "Sample Category",
+      stock: 50,
+      rating: 4.0,
+    },
+    {
+      id: 3,
+      name: "Sample Product 3",
+      img_url: "https://via.placeholder.com/150",
+      price: 39.99,
+      description: "This is yet another sample product description.",
+      category: "Sample Category",
+      stock: 20,
+      rating: 4.8,
+    },
+    {
+      id: 4,
+      name: "Sample Product 4",
+      img_url: "https://via.placeholder.com/150",
+      price: 49.99,
+      description: "This is a fourth sample product description.",
+      category: "Sample Category",
+      stock: 10,
+      rating: 4.2,
+    },
+    {
+      id: 5,
+      name: "Sample Product 5",
+      img_url: "https://via.placeholder.com/150",
+      price: 59.99,
+      description: "This is a fifth sample product description.",
+      category: "Sample Category",
+      stock: 5,
+      rating: 4.9,
+    },
+    {
+      id: 6,
+      name: "Sample Product 6",
+      img_url: "https://via.placeholder.com/150",
+      price: 69.99,
+      description: "This is a sixth sample product description.",
+      category: "Sample Category",
+      stock: 2,
+
+      rating: 4.7,
+    },
+  ];
+
   // Cart functionality
 
   const [cartCount, setCartCount] = useState(0);
@@ -57,6 +121,8 @@ const App = () => {
           setError={setError}
           cartCount={cartCount}
           products={products}
+          setSelectedProduct={setSelectedProduct}
+          selectedProduct={selectedProduct}
           handleAddToCart={handleAddToCart}
           setCartCount={setCartCount}
           fetchProducts={fetchProducts}
@@ -100,6 +166,8 @@ const App = () => {
       path: "/detail/*",
       element: (
         <ProductDetail
+          products={products}
+          selectedProduct={selectedProduct}
           cartCount={cartCount}
           handleAddToCart={handleAddToCart}
           setCartCount={setCartCount}
