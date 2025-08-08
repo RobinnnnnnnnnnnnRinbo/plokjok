@@ -17,9 +17,6 @@ const ProductList = React.forwardRef(
   ) => {
     const [sortBy, setSortBy] = useState("name");
 
-    useEffect(() => {
-      fetchProducts();
-    }, []);
 
     let sortedProducts;
 

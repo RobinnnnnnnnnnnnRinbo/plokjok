@@ -16,16 +16,16 @@ import AdminPage from "./Pages/Admin/AdminPage.jsx";
 
 const App = () => {
   // State for products and loading/error states
-  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState("");
   const [error, setError] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const product = [
+  const products = [
     {
       id: 1,
-      name: "Sample Product",
-      img_url: "https://via.placeholder.com/150",
+      name: "Headphone",
+      img_url:
+        "https://products.shureweb.eu/cdn-cgi/image/width=1380,height=1380,format=auto/shure_product_db/product_main_images/files/c25/16a/40-/original/ce632827adec4e1842caa762f10e643d.webp",
       price: 19.99,
       description: "This is a sample product description.",
       category: "Sample Category",
@@ -34,8 +34,9 @@ const App = () => {
     },
     {
       id: 2,
-      name: "Sample Product 2",
-      img_url: "https://via.placeholder.com/150",
+      name: "Gaming Mouse",
+      img_url:
+        "https://www.pngplay.com/wp-content/uploads/2/Gaming-Pc-Mouse-PNG-Clipart-Background.png",
       price: 29.99,
       description: "This is another sample product description.",
       category: "Sample Category",
@@ -44,8 +45,9 @@ const App = () => {
     },
     {
       id: 3,
-      name: "Sample Product 3",
-      img_url: "https://via.placeholder.com/150",
+      name: "Game Controller",
+      img_url:
+        "https://static.vecteezy.com/system/resources/previews/043/016/304/non_2x/ai-generated-3d-rendering-of-a-game-controller-on-transparent-background-ai-generated-free-png.png",
       price: 39.99,
       description: "This is yet another sample product description.",
       category: "Sample Category",
@@ -54,8 +56,9 @@ const App = () => {
     },
     {
       id: 4,
-      name: "Sample Product 4",
-      img_url: "https://via.placeholder.com/150",
+      name: "Keyboard",
+      img_url:
+        "https://static.vecteezy.com/system/resources/thumbnails/052/855/141/small_2x/rgb-illuminated-mechanical-gaming-keyboard-free-png.png",
       price: 49.99,
       description: "This is a fourth sample product description.",
       category: "Sample Category",
@@ -64,8 +67,9 @@ const App = () => {
     },
     {
       id: 5,
-      name: "Sample Product 5",
-      img_url: "https://via.placeholder.com/150",
+      name: "Nuclear Bomb",
+      img_url:
+        "https://wallpapers.com/images/featured/nuclear-bomb-png-jrzj712nv8jd9oei.jpg",
       price: 59.99,
       description: "This is a fifth sample product description.",
       category: "Sample Category",
@@ -74,8 +78,9 @@ const App = () => {
     },
     {
       id: 6,
-      name: "Sample Product 6",
-      img_url: "https://via.placeholder.com/150",
+      name: "Gaming Microphone",
+      img_url:
+        "https://png.pngtree.com/png-clipart/20240126/original/pngtree-gaming-microphone-png-image_14158865.png",
       price: 69.99,
       description: "This is a sixth sample product description.",
       category: "Sample Category",
@@ -120,12 +125,11 @@ const App = () => {
           error={error}
           setError={setError}
           cartCount={cartCount}
-          products={products}
           setSelectedProduct={setSelectedProduct}
           selectedProduct={selectedProduct}
           handleAddToCart={handleAddToCart}
           setCartCount={setCartCount}
-          fetchProducts={fetchProducts}
+          products={products}
         />
       ),
     },
@@ -180,7 +184,6 @@ const App = () => {
         <EditProduct
           selectedProduct={selectedProduct}
           products={products}
-          setProducts={setProducts}
           setSelectedProduct={setSelectedProduct}
         />
       ),
@@ -190,8 +193,6 @@ const App = () => {
       element: (
         <ProductsAdmin
           products={products}
-          fetchProducts={fetchProducts}
-          setProducts={setProducts}
           loading={loading}
           setLoading={setLoading}
           error={error}

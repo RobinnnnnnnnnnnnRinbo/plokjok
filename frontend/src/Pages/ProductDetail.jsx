@@ -21,7 +21,7 @@ const ProductDetail = ({
     <div className="bg-white h-screen flex flex-col gap-8">
       <NavBar cartCount={cartCount} />
       <div className="flex flex-col h-full gap-8 mt-18">
-        <div className="h-[40vh] bg-pm rounded-lg overflow-hidden flex items-center justify-center mx-4">
+        <div className="h-[40vh] bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center mx-4">
           <img
             className="max-w-full max-h-full object-contain"
             src={selectedProduct?.img_url}
@@ -29,28 +29,28 @@ const ProductDetail = ({
           />
         </div>
         <div className="h-1/10 -mt-5 flex gap-3 px-4">
-          <div className="bg-green-200 h-full w-1/4 flex items-center justify-center">
+          <div className="bg-gray-200 rounded h-full w-1/4 flex items-center justify-center">
             <img
               className="max-w-full max-h-full object-contain"
               src={selectedProduct?.img_url}
               alt={selectedProduct?.name || "Product image"}
             />
           </div>
-          <div className="bg-green-200 h-full w-1/4 flex items-center justify-center">
+          <div className="bg-gray-200 rounded h-full w-1/4 flex items-center justify-center">
             <img
               className="max-w-full max-h-full object-contain"
               src={selectedProduct?.img_url}
               alt={selectedProduct?.name || "Product image"}
             />
           </div>
-          <div className="bg-green-200 h-full w-1/4 flex items-center justify-center">
+          <div className="bg-gray-200 rounded h-full w-1/4 flex items-center justify-center">
             <img
               className="max-w-full max-h-full object-contain"
               src={selectedProduct?.img_url}
               alt={selectedProduct?.name || "Product image"}
             />
           </div>
-          <div className="bg-green-200 h-full w-1/4 flex items-center justify-center">
+          <div className="bg-gray-200 rounded h-full w-1/4 flex items-center justify-center">
             <img
               className="max-w-full max-h-full object-contain"
               src={selectedProduct?.img_url}
@@ -83,7 +83,7 @@ const ProductDetail = ({
         <div className="flex px-4">
           <ColorSelector />
         </div>
-        <div className="fixed bottom-4 left-0 h-16 z-50 w-full bg-white flex">
+        <div className="fixed bottom-4 left-0 h-16 z-50 w-full bg-white flex justify-between items-center px-4">
           <div className="w-1/2 flex items-center justify-evenly">
             <button onClick={() => handleQuantity("minus")}>
               <img className="h-8" src={assets.minus} alt="" />
