@@ -51,9 +51,15 @@ const App = () => {
       path: "/",
       element: (
         <HomePage
+          loading={loading}
+          setLoading={setLoading}
+          error={error}
+          setError={setError}
           cartCount={cartCount}
+          products={products}
           handleAddToCart={handleAddToCart}
           setCartCount={setCartCount}
+          fetchProducts={fetchProducts}
         />
       ),
     },
