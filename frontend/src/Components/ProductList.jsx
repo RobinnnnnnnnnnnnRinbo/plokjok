@@ -1,80 +1,49 @@
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import ProductGrid from "./Products/ProductGrid";
 import FilterOption from "./Products/FilterOption";
+import axios from "axios";
 
-const ProductList = React.forwardRef(({ onAddToCart }, ref) => {
-  const [sortBy, setSortBy] = useState("name");
-  const products = [
+const ProductList = React.forwardRef(
+  (
     {
-      id: 1,
-      name: "AHeadset",
-      price: 19.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
+      handleAddToCart,
+      products,
+      fetchProducts,
+      loading,
+      selectedProduct,
+      setSelectedProduct,
     },
-    {
-      id: 1,
-      name: "BHeadset",
-      price: 29.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "CHeadset",
-      price: 39.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "DHeadset",
-      price: 49.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "EHeadset",
-      price: 59.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "FHeadset",
-      price: 69.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "GHeadset",
-      price: 79.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-  ];
+    ref
+  ) => {
+    const [sortBy, setSortBy] = useState("name");
 
-  let sortedProducts;
 
-  if (sortBy === "name")
-    sortedProducts = products
-      .slice()
-      .sort((a, b) => a.name.localeCompare(b.name));
+    let sortedProducts;
 
-  if (sortBy === "p-l-h")
-    sortedProducts = products.sort((a, b) => a.price - b.price);
+    if (sortBy === "name")
+      sortedProducts = products
+        .slice()
+        .sort((a, b) => a.name.localeCompare(b.name));
 
-  if (sortBy === "p-h-l")
-    sortedProducts = products.sort((a, b) => b.price - a.price);
+    if (sortBy === "p-l-h")
+      sortedProducts = products.sort((a, b) => a.price - b.price);
 
-  return (
-    <div ref={ref}>
-      <FilterOption sortBy={sortBy} setSortBy={setSortBy} />
-      <ProductGrid onAddToCart={onAddToCart} products={sortedProducts} />
-    </div>
-  );
-});
+    if (sortBy === "p-h-l")
+      sortedProducts = products.sort((a, b) => b.price - a.price);
+
+    return (
+      <div ref={ref}>
+        <FilterOption sortBy={sortBy} setSortBy={setSortBy} />
+        <ProductGrid
+          loading={loading}
+          handleAddToCart={handleAddToCart}
+          products={sortedProducts}
+          selectedProduct={selectedProduct}
+          setSelectedProduct={setSelectedProduct}
+        />
+      </div>
+    );
+  }
+);
 
 export default ProductList;

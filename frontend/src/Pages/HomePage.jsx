@@ -6,7 +6,18 @@ import Brand from "../Components/Brand";
 import Footer from "../Components/Footer";
 import ProductList from "../Components/ProductList";
 
-const HomePage = ({ cartCount, handleAddToCart }) => {
+const HomePage = ({
+  cartCount,
+  handleAddToCart,
+  products,
+  fetchProducts,
+  loading,
+  setLoading,
+  error,
+  setError,
+  selectedProduct,
+  setSelectedProduct,
+}) => {
   const categoryRef = useRef();
   const productRef = useRef();
   const heroRef = useRef();
@@ -23,7 +34,19 @@ const HomePage = ({ cartCount, handleAddToCart }) => {
       <HeroSection ref={heroRef} />
       <Category ref={categoryRef} />
       <Brand />
-      <ProductList ref={productRef} onAddToCart={handleAddToCart} />
+      <ProductList
+        loading={loading}
+        setLoading={setLoading}
+        error={error}
+        setError={setError}
+        setSelectedProduct={setSelectedProduct}
+        selectedProduct={selectedProduct}
+        cartCount={cartCount}
+        handleAddToCart={handleAddToCart}
+        products={products}
+        ref={productRef}
+        fetchProducts={fetchProducts}
+      />
       <Footer ref={aboutRef} />
     </>
   );

@@ -1,4 +1,7 @@
 import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import aj from "./lib/arcjet.js";
 import morgan from "morgan";
 import productRoute from "./routes/productRoute.js";
 import { pool } from "./database/db.js";
@@ -6,33 +9,40 @@ import { pool } from "./database/db.js";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Manual CORS middleware (more reliable)
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
+app.use(express.json());
+app.use(cors());
+app.use(helmet());
+app.use(morgan("dev"));
 
-  // Allow all origins for development
-  res.header("Access-Control-Allow-Origin", origin || "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  res.header("Access-Control-Allow-Credentials", "true");
-
-  console.log(`${req.method} ${req.path} - Origin: ${origin}`);
-  console.log("CORS headers set for:", origin);
-
-  // Handle preflight requests
-  if (req.method === "OPTIONS") {
-    res.sendStatus(200);
-    return;
+app.use(async (req, res, next) => {
+  try {
+    const decision = await aj.protect(req, { requested: 1 });
+    if (decision.isDenied()) {
+      if (decision.reason.isRateLimit()) {
+        return res
+          .status(429)
+          .json({ message: "Rate limit exceeded. Try again later." });
+      }
+      if (decision.reason.isBot()) {
+        return res.status(403).json({ message: "Access denied for bots." });
+      }
+      return res.status(403).json({ message: "Access denied." });
+    }
+    if (
+      decision.results.some(
+        (result) => result.reason.isBot() && result.reason.isSpoofed()
+      )
+    ) {
+      return res.status(403).json({ message: "Spoof bot detected" });
+    }
+    next();
+  } catch (error) {
+    console.error("Arcjet protection error:", error);
+    return next(error);
   }
-
-  next();
 });
 
-app.use(morgan("combined"));
-app.use(express.json());
+app.use("/api/products", productRoute);
 
 const connectDB = async () => {
   try {
@@ -41,6 +51,8 @@ const connectDB = async () => {
         product_id SERIAL PRIMARY KEY,
         product_name VARCHAR(100) NOT NULL,
         description TEXT,
+        stock INT NOT NULL,
+        category VARCHAR(50),
         price NUMERIC(10, 2) NOT NULL,
         img_url VARCHAR(255),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -56,7 +68,6 @@ const connectDB = async () => {
 connectDB();
 
 // Routes
-app.use("/api/products", productRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
