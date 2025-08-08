@@ -7,6 +7,9 @@ import NotFoundPage from "./Pages/NotFoundPage.jsx";
 import ProductDetail from "./Pages/ProductDetail.jsx";
 import LogIn from "./Pages/LogIn.jsx";
 import SignUp from "./Pages/SignUp.jsx";
+import ProductsAdmin from "./Pages/Admin/ProductsAdmin.jsx";
+import EditProduct from "./Pages/Admin/EditProduct.jsx";
+import AdminPage from "./Pages/Admin/AdminPage.jsx";
 
 const App = () => {
   const [cartCount, setCartCount] = useState(0);
@@ -39,7 +42,6 @@ const App = () => {
           setUsernameInput={setUsernameInput}
           passwordInput={passwordInput}
           setPasswordInput={setPasswordInput}
-         
         />
       ),
     },
@@ -74,6 +76,18 @@ const App = () => {
           setCartCount={setCartCount}
         />
       ),
+    },
+    {
+      path: "/admin/products/edit",
+      element: <EditProduct />,
+    },
+    {
+      path: "/admin/products",
+      element: <ProductsAdmin />,
+    },
+    {
+      path: "/admin",
+      element: <AdminPage />,
     },
     {
       path: "/*",

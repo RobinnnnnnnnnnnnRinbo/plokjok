@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductGrid from "./Products/ProductGrid";
 import FilterOption from "./Products/FilterOption";
+import axios from "axios";
 
 const ProductList = React.forwardRef(({ onAddToCart }, ref) => {
   const [sortBy, setSortBy] = useState("name");
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:3000/api/products")
+      .then((response) => {
+        setProducts(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  console.log(products);
 
   let sortedProducts;
 
