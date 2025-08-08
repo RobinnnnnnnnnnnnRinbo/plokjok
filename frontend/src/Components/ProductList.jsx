@@ -4,57 +4,6 @@ import FilterOption from "./Products/FilterOption";
 
 const ProductList = React.forwardRef(({ onAddToCart }, ref) => {
   const [sortBy, setSortBy] = useState("name");
-  const products = [
-    {
-      id: 1,
-      name: "AHeadset",
-      price: 19.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "BHeadset",
-      price: 29.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "CHeadset",
-      price: 39.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "DHeadset",
-      price: 49.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "EHeadset",
-      price: 59.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "FHeadset",
-      price: 69.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-    {
-      id: 1,
-      name: "GHeadset",
-      price: 79.99,
-      img_url:
-        "https://resource.logitech.com/content/dam/gaming/en/products/pro-x/pro-headset-gallery-1.png",
-    },
-  ];
 
   let sortedProducts;
 
