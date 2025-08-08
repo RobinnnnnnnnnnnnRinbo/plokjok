@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-const ProductsAdmin = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState("");
-  const [error, setError] = useState("");
-
-  const fetchProducts = async () => {
-    setLoading(true);
-    setError("");
-    try {
-      const response = await axios.get("http://127.0.0.1:3000/api/products");
-      setProducts(response.data);
-    } catch (error) {
-      console.log(error);
-      setError("Failed to fetch products. Please try again later.");
-    }
-    setLoading(false);
-  };
-
+const ProductsAdmin = ({
+  products,
+  fetchProducts,
+  setProducts,
+  loading,
+  setLoading,
+  error,
+  setError,
+  selectedProduct,
+  setSelectedProduct,
+}) => {
   const deleteProducts = async (id) => {
     setLoading(true);
     setError("");
@@ -50,25 +44,9 @@ const ProductsAdmin = () => {
     setLoading(false);
   };
 
-  const editProduct = async (id, updatedProduct) => {
-    setLoading(true);
-    setError("");
-    try {
-      const response = await axios.put(
-        `http://127.0.0.1:3000/api/products/${id}`,
-        updatedProduct
-      );
-      setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product.id === id ? response.data : product
-        )
-      );
-    } catch (error) {
-      console.log(error);
-      setError("Failed to update product. Please try again later.");
-    }
-    setLoading(false);
-  };
+  function handleEdit(product) {
+    setSelectedProduct(product);
+  }
 
   useEffect(() => {
     fetchProducts();
@@ -126,9 +104,14 @@ const ProductsAdmin = () => {
                   {p.category?.name ?? p.category ?? "-"}
                 </td>
                 <td className="px-3 py-2">
-                  <button className="px-2 py-1 text-xs bg-blue-600 text-white rounded mr-2">
-                    Edit
-                  </button>
+                  <Link to={`/admin/products/edit`}>
+                    <button
+                      onClick={() => handleEdit(p)}
+                      className="px-2 py-1 text-xs bg-blue-600 text-white rounded mr-2"
+                    >
+                      Edit
+                    </button>
+                  </Link>
                   <button
                     onClick={() => deleteProducts(p.id)}
                     className="px-2 py-1 text-xs bg-red-600 text-white rounded"
