@@ -10,12 +10,13 @@ const ProductCard = ({
   price,
   img,
   item,
-
+  handleAddToCart,
   setSelectedProduct,
 }) => {
   function handleSelectProduct() {
     setSelectedProduct(item);
   }
+
   return (
     <div className="card bg-gray-100 w-48 h-80 shadow-sm flex flex-col">
       <Link to={"/detail"} onClick={handleSelectProduct}>
@@ -32,7 +33,10 @@ const ProductCard = ({
           <ProductPrice name={name} price={price} />
         </div>
         <div className="card-actions mt-auto w-full">
-          <button className="bg-pm text-white py-2 px-4 rounded w-full flex items-center justify-center gap-2">
+          <button
+            onClick={() => handleAddToCart(1)}
+            className="bg-pm text-white py-2 px-4 rounded w-full flex items-center justify-center gap-2"
+          >
             <img className="h-6" src={assets.cartPlus} alt="" />
             <span>Add to Cart</span>
           </button>

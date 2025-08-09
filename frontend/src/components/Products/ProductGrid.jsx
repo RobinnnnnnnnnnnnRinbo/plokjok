@@ -6,7 +6,6 @@ const ProductGrid = ({
   products,
   loading,
   error,
-
   setSelectedProduct,
 }) => {
   return (

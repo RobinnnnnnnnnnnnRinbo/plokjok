@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useProducts } from "../../hooks/useProducts";
 
-const ProductsAdmin = ({
-  products,
-  fetchProducts,
-  setProducts,
-  loading,
-  setLoading,
-  error,
-  setError,
-  selectedProduct,
-  setSelectedProduct,
-}) => {
+const ProductsAdmin = ({ selectedProduct, setSelectedProduct }) => {
+  const { products, setProducts, loading, error, setLoading } = useProducts();
   const deleteProducts = async (id) => {
     setLoading(true);
     setError("");
@@ -48,17 +40,15 @@ const ProductsAdmin = ({
     setSelectedProduct(product);
   }
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   return (
     <div className="p-4 text-white h-screen overflow-y-auto">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-lg font-semibold">Products</h1>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded">
-          Create Product
-        </button>
+        <Link to={"/admin/products/create"}>
+          <button className="px-4 py-2 bg-blue-600 text-white rounded">
+            Create Product
+          </button>
+        </Link>
       </div>
 
       <div className="overflow-x-auto border rounded-lg mt-2">

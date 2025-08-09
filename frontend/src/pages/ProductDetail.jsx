@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
-import ColorSelector from "../Components/ProductDetail/ColorOption";
-import NavBar from "../Components/NavBar";
+import ColorSelector from "../components/product-detail/ColorOption";
+import NavBar from "../components/NavBar";
+import { useSelectedProduct } from "../hooks/useSelectedProduct";
 
-const ProductDetail = ({
-  handleAddToCart,
-  cartCount,
-  selectedProduct,
-  setCartCount,
-}) => {
+const ProductDetail = ({ handleAddToCart, cartCount, selectedProduct }) => {
   const [quantity, setQuantity] = useState(1);
 
   function handleQuantity(value) {
@@ -105,7 +101,7 @@ const ProductDetail = ({
                 onClick={() => handleAddToCart(quantity)}
                 className="border text-sm flex items-center justify-center"
               >
-                <img className="p-4" src={assets.cart} alt="" />
+                <img className="h-12 p-2" src={assets.cartM} alt="" />
               </button>
             </Link>
             <button className="text-sm p-4 border bg-pm text-white">

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets";
 import { Link } from "react-router-dom";
-import Input from "../Components/LogIn/Input";
+import Input from "../components/login/Input.jsx";
 
-import LogInButton from "../Components/LogIn/LogInButton";
-import AuthButton from "../Components/LogIn/AuthButton";
+import LogInButton from "../components/login/LogInButton.jsx";
+import AuthButton from "../components/login/AuthButton.jsx";
 
 const SignUp = ({
   usernameInput,
