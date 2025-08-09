@@ -1,22 +1,12 @@
 import React, { use, useEffect, useState } from "react";
 import ProductGrid from "./Products/ProductGrid";
 import FilterOption from "./Products/FilterOption";
-import axios from "axios";
+import { useProducts } from "../hooks/useProducts";
 
 const ProductList = React.forwardRef(
-  (
-    {
-      handleAddToCart,
-      products,
-      fetchProducts,
-      loading,
-      selectedProduct,
-      setSelectedProduct,
-    },
-    ref
-  ) => {
+  ({ handleAddToCart, setSelectedProduct }, ref) => {
+    const { products, loading, error } = useProducts();
     const [sortBy, setSortBy] = useState("name");
-
 
     let sortedProducts;
 
@@ -36,10 +26,10 @@ const ProductList = React.forwardRef(
         <FilterOption sortBy={sortBy} setSortBy={setSortBy} />
         <ProductGrid
           loading={loading}
+          error={error}
+          setSelectedProduct={setSelectedProduct}
           handleAddToCart={handleAddToCart}
           products={sortedProducts}
-          selectedProduct={selectedProduct}
-          setSelectedProduct={setSelectedProduct}
         />
       </div>
     );

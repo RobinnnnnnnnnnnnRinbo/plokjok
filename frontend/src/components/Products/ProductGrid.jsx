@@ -6,16 +6,16 @@ const ProductGrid = ({
   products,
   loading,
   error,
-
   setSelectedProduct,
 }) => {
   return (
     <div className="bg-white">
       <div className="flex flex-wrap h-screen justify-center gap-6 overflow-y-auto">
-        {loading && (
+        {/* FrontEnd  */}
+        {/* {loading && (
           <span className="loading loading-bars loading-xl">Loading...</span>
         )}
-        {error && <span>{error}</span>}
+        {error && <span>{error}</span>} */}
         {products.map((item, index) => (
           <ProductCard
             item={item}
