@@ -12,10 +12,10 @@ const ProductGrid = ({
     <div className="bg-white">
       <div className="flex flex-wrap h-screen justify-center gap-6 overflow-y-auto">
         {/* FrontEnd  */}
-        {/* {loading && (
+        {loading && (
           <span className="loading loading-bars loading-xl">Loading...</span>
         )}
-        {error && <span>{error}</span>} */}
+        {error && <span>{error}</span>}
         {products.map((item, index) => (
           <ProductCard
             item={item}
