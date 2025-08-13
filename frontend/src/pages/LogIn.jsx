@@ -25,19 +25,6 @@ const LogIn = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  //Messy log validation might clean later
-
-  function validateEmail() {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(identifier);
-  }
-
-  function validatePassword() {
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
-    return passwordRegex.test(password);
-  }
-
   function triggerAlert() {
     setMountAlert(true);
     setTimeout(() => setShowAlert(true), 10);
@@ -45,24 +32,18 @@ const LogIn = () => {
     setTimeout(() => setMountAlert(false), 2300);
   }
 
-  const validEmail = validateEmail();
-  const validPass = validatePassword();
-
   function handleLogIn() {
     const authed = logInCheck(identifier, identifier, password);
 
-    if (authed && validPass) {
+    if (!identifier && !password) {
+      setAlert(authed.error);
+      triggerAlert();
+    } else if (authed.success) {
       navigate("/");
       setAlert("Succesfully Login");
       triggerAlert();
-    } else if (!validEmail) {
-      setAlert("Invalid Email");
-      triggerAlert();
-    } else if (!validPass) {
-      setAlert("Invalid Password");
-      triggerAlert();
     } else {
-      setAlert("Invalid credential");
+      setAlert(authed.error);
       console.log("Invalid");
       triggerAlert();
     }

@@ -11,27 +11,32 @@ export const useAuthStore = create((set, get) => ({
   ],
   authUser: [],
 
-  createUser: (username, email, password) =>
+  createUser: (username, email, password) => {
     set((state) => ({
       users: [...state.users, { username, email, password }],
       authUser: { username, email, password, isAuth: true },
-    })),
-
+    }));
+    console.log("Creating user:", username, email, password);
+  },
   logInCheck: (username, email, password) => {
-    const user = get().users.find(
-      (u) =>
-        (u.email === email || u.username === username) &&
-        u.password === password
-    );
-
-    if (user) {
-      set((state) => ({
-        ...state,
-        authUser: { ...user, isAuth: true },
-      }));
-      return true;
+    console.log("Logging in with:", username || email, password);
+    if (!username || (!email && !password)) {
+      return { success: false, error: "Please enter username and password" };
     }
-    return false;
+    const user = get().users.find(
+      (u) => u.email === email || u.username === username
+    );
+    if (!user) {
+      return { success: false, error: "Email or username not found." };
+    }
+    if (user.password !== password) {
+      return { success: false, error: "Incorrect password." };
+    }
+    set((state) => ({
+      ...state,
+      authUser: { ...user, isAuth: true },
+    }));
+    return { success: true };
   },
 
   logout: () => set((state) => ({ ...state, authUser: null })),

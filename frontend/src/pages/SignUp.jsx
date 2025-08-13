@@ -47,7 +47,7 @@ const SignUp = () => {
 
   function validatePassword() {
     const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
     return passwordRegex.test(password);
   }
 
@@ -55,36 +55,37 @@ const SignUp = () => {
   const validPass = validatePassword();
 
   function handleSignUp() {
-    if (
-      username &&
-      email &&
-      password &&
-      validEmail &&
-      validPass &&
-      password === confirmPassword
-    ) {
-      createUser(username, email, password);
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-      setAlert("Succesfully Login");
+    if (!username || !email || !password) {
+      setAlert("Please fill in all fields");
       triggerAlert();
-      navigate("/login");
-    } else if (!validEmail) {
+      return;
+    }
+    if (password !== confirmPassword) {
+      setAlert("Passwords don't match");
+      triggerAlert();
+      return;
+    }
+    if (!validEmail) {
       setAlert("Invalid Email");
       triggerAlert();
-    } else if (!validPass) {
-      setAlert("Invalid Password");
-      triggerAlert();
-    } else if (password !== confirmPassword) {
-      setAlert("Password doesn't match");
-      triggerAlert();
-    } else {
-      setAlert("Unknown Error");
-
-      triggerAlert();
+      return;
     }
+    if (!validPass) {
+      setAlert(
+        "Password atleast 8 character, include numbers, specials (e.g. !@#$%..) "
+      );
+      triggerAlert();
+      return;
+    }
+
+    createUser(username, email, password);
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setAlert("Successfully Registered");
+    triggerAlert();
+    navigate("/login");
   }
 
   return (
@@ -92,7 +93,7 @@ const SignUp = () => {
       {mountAlert && (
         <div
           role="alert"
-          className={`alert alert-warning absolute top-3 right-3 transition-all duration-300 ease-in-out ${
+          className={`alert alert-warning max-w-74 absolute top-3 right-3 transition-all duration-300 ease-in-out ${
             showAlert ? "opacity-100 scale-100" : "opacity-0 scale-95"
           }`}
         >
