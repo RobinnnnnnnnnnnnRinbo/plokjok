@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
+import { useCartStore } from "../../hooks/useCartStore";
+import { useProductStore } from "../../hooks/useProductStore";
 import { assets } from "../../assets/assets";
 import ProductPrice from "./ProductPrice";
 
-const ProductCard = ({
-  name,
-  price,
-  img,
-  item,
-  handleAddToCart,
-  setSelectedProduct,
-}) => {
-  function handleSelectProduct() {
-    setSelectedProduct(item);
-  }
+const ProductCard = ({ name, price, img, item }) => {
+  const addToCart = useCartStore((state) => state.addToCart);
+  const setSelectedProduct = useProductStore(
+    (state) => state.setSelectedProduct
+  );
+
+  const handleAddToCart = () => {
+    addToCart(item, 1);
+  };
 
   return (
     <div className="card bg-gray-100 w-48 h-80 shadow-sm flex flex-col">
-      <Link to={"/detail"} onClick={handleSelectProduct}>
+      <Link to={"/detail"} onClick={() => setSelectedProduct(item)}>
         <figure className="px-4 pt-4 flex-shrink-0 h-40">
           <img
             src={img}
@@ -34,7 +32,7 @@ const ProductCard = ({
         </div>
         <div className="card-actions mt-auto w-full">
           <button
-            onClick={() => handleAddToCart(1)}
+            onClick={handleAddToCart}
             className="bg-pm text-white py-2 px-4 rounded w-full flex items-center justify-center gap-2"
           >
             <img className="h-6" src={assets.cartPlus} alt="" />

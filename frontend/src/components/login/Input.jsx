@@ -2,21 +2,15 @@ import React, { useState } from "react";
 import { assets } from "../../assets/assets";
 
 const Input = ({
-  placeholder,
+  value,
+  setValue,
   icon,
-  type,
   showPass,
-  usernameInput,
-  setUsernameInput,
-  passwordInput,
-  setPasswordInput,
+  passwordVisible,
+  setPasswordVisible,
+  ...props
 }) => {
   const [onInput, setOnInput] = useState(true);
-  const [passwordVisible, setPasswordVisible] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setPasswordVisible((prev) => !prev);
-  };
 
   return (
     <div className="flex relative">
@@ -29,34 +23,29 @@ const Input = ({
       />
 
       <input
-        onChange={(e) => {
-          if (type === "password") {
-            setPasswordInput(e.target.value);
-          } else {
-            setUsernameInput(e.target.value);
-          }
-        }}
+        {...props}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         onFocus={() => setOnInput(false)}
         onBlur={() => setOnInput(true)}
         className={`bg-[#ededed] h-[50px] outline-none w-[75vw] ${
           onInput ? `pl-10 duration-100` : `pl-3 duration-100`
         } rounded-xl`}
-        type={type === "password" && !passwordVisible ? "password" : "text"}
-        value={type === "password" ? passwordInput : usernameInput}
-        placeholder={placeholder}
       />
       {showPass &&
         (passwordVisible ? (
           <img
             className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
             src={assets.hidePass}
-            onClick={togglePasswordVisibility}
+            onClick={() => setPasswordVisible(false)}
+            alt="Hide password"
           />
         ) : (
           <img
             className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
             src={assets.showPass}
-            onClick={togglePasswordVisibility}
+            onClick={() => setPasswordVisible(true)}
+            alt="Show password"
           />
         ))}
     </div>
