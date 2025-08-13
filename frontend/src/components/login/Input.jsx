@@ -8,6 +8,7 @@ const Input = ({
   showPass,
   passwordVisible,
   setPasswordVisible,
+  onBlur,
   ...props
 }) => {
   const [onInput, setOnInput] = useState(true);
@@ -27,7 +28,7 @@ const Input = ({
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onFocus={() => setOnInput(false)}
-        onBlur={() => setOnInput(true)}
+        onBlur={onBlur}
         className={`bg-[#ededed] h-[50px] outline-none w-[75vw] ${
           onInput ? `pl-10 duration-100` : `pl-3 duration-100`
         } rounded-xl`}

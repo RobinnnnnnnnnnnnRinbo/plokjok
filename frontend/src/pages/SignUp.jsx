@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { assets } from "../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -21,6 +21,13 @@ const SignUp = () => {
   const [mountAlert, setMountAlert] = useState(false);
 
   const { createUser, log } = useAuthStore();
+
+  const formRef = useRef();
+
+  // Scroll to top when any input loses focus
+  const handleBlur = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   //Messy log validation might clean later
 
@@ -119,7 +126,10 @@ const SignUp = () => {
           Let's get logged in and continue your shopping.
         </span>
       </div>
-      <form className="bg-white flex flex-col items-center relative gap-5 mt-4">
+      <form
+        ref={formRef}
+        className="bg-white flex flex-col items-center relative gap-5 mt-4"
+      >
         <Input
           // username={true}
           type="text"
@@ -127,6 +137,7 @@ const SignUp = () => {
           placeholder="Username"
           value={username}
           setValue={setUsername}
+          onBlur={handleBlur}
         />
         <Input
           type="email"
@@ -134,6 +145,7 @@ const SignUp = () => {
           placeholder="Email address"
           value={email}
           setValue={setEmail}
+          onBlur={handleBlur}
         />
         <Input
           type={passwordVisible ? "text" : "password"}
@@ -144,6 +156,7 @@ const SignUp = () => {
           passwordVisible={passwordVisible}
           setPasswordVisible={setPasswordVisible}
           placeholder="Password"
+          onBlur={handleBlur}
         />
 
         {/* Confirm Password field */}
@@ -156,6 +169,7 @@ const SignUp = () => {
           passwordVisible={confirmPasswordVisible}
           setPasswordVisible={setConfirmPasswordVisible}
           placeholder="Confirm Password"
+          onBlur={handleBlur}
         />
 
         <LogInButton

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import Input from "../components/login/Input";
@@ -17,6 +17,13 @@ const LogIn = () => {
   const navigate = useNavigate();
 
   const { logInCheck, log } = useAuthStore();
+
+  const formRef = useRef();
+
+  // Scroll to top when any input loses focus
+  const handleBlur = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   //Messy log validation might clean later
 
@@ -100,13 +107,17 @@ const LogIn = () => {
           Let's get logged in and continue your shopping.
         </span>
       </div>
-      <form className="bg-white flex flex-col items-center gap-4 mt-4">
+      <form
+        ref={formRef}
+        className="bg-white flex flex-col items-center gap-4 mt-4"
+      >
         <Input
           type="email"
           icon={assets.user}
           placeholder="Email address or username"
           value={identifier}
           setValue={setIdentifier}
+          onBlur={handleBlur}
         />
         <Input
           type={passwordVisible ? "text" : "password"}
@@ -117,6 +128,7 @@ const LogIn = () => {
           passwordVisible={passwordVisible}
           setPasswordVisible={setPasswordVisible}
           placeholder="Password"
+          onBlur={handleBlur}
         />
         <div className="w-[75vw] flex justify-between">
           <div>
