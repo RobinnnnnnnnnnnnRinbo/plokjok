@@ -12,19 +12,18 @@ const ProductGrid = ({
     <div className="bg-white">
       <div className="flex flex-wrap h-screen justify-center gap-6 overflow-y-auto">
         {/* FrontEnd  */}
-        {/* {loading && (
+        {loading && (
           <span className="loading loading-bars loading-xl">Loading...</span>
         )}
-        {error && <span>{error}</span>} */}
-        {products.map((item, index) => (
+        {error && <span>{error}</span>}
+        {products.map((product, index) => (
           <ProductCard
-            item={item}
+            item={product}
             setSelectedProduct={setSelectedProduct}
-            handleAddToCart={handleAddToCart}
             key={index}
-            name={item.name}
-            price={item.price}
-            img={item.img_url}
+            name={product.name}
+            price={product.price}
+            img={product.img_url}
           />
         ))}
       </div>

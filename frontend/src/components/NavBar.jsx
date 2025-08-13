@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets.js"; // Adjust the path as necessary
+import { useCartStore } from "../hooks/useCartStore.js"; // Assuming you have a custom hook for cart management
 
 const TS_BREAKPOINT = 810;
 const TL_BREAKPOINT = 1024;
 
-const NavBar = ({ productRef, categoryRef, heroRef, aboutRef, cartCount }) => {
+const NavBar = ({ productRef, categoryRef, heroRef, aboutRef }) => {
   const [isSearch, setIsSearch] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const { cart, getTotalItems } = useCartStore();
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -169,7 +171,7 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef, cartCount }) => {
           )}
           <div className="relative">
             <div className="absolute h-5 w-5 flex items-center justify-center text-[11px] font-bold text-white rounded-full bg-red-500 -top-1 -right-1">
-              {cartCount}
+              {getTotalItems()}
             </div>
             <Link to={"/cart"}>
               <img type="button" className="h-7" src={assets.cartM} alt="" />

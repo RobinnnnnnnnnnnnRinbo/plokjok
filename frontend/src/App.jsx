@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import axios from "axios";
 
 // Importing components and pages
 import HomePage from "./pages/HomePage.jsx";
@@ -15,77 +14,30 @@ import AdminPage from "./pages/admin/AdminPage.jsx";
 import CreateProduct from "./pages/admin/CreateProduct.jsx";
 
 const App = () => {
-  // State for products and loading/error states
 
   const [selectedProduct, setSelectedProduct] = useState(null);
-
-  // Cart functionality
-
-  const [cartCount, setCartCount] = useState(0);
-  const handleAddToCart = (qty = 1) => setCartCount((c) => c + Number(qty));
-
-  // User authentication state
-  const [usernameInput, setUsernameInput] = useState("");
-  const [passwordInput, setPasswordInput] = useState("");
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: (
-        <HomePage
-          cartCount={cartCount}
-          setSelectedProduct={setSelectedProduct}
-          handleAddToCart={handleAddToCart}
-          setCartCount={setCartCount}
-        />
-      ),
+      element: <HomePage setSelectedProduct={setSelectedProduct} />,
     },
     {
       path: "/login",
-      element: (
-        <LogIn
-          usernameInput={usernameInput}
-          setUsernameInput={setUsernameInput}
-          passwordInput={passwordInput}
-          setPasswordInput={setPasswordInput}
-        />
-      ),
+      element: <LogIn />,
     },
     {
       path: "/cart",
-      element: (
-        <CartPage
-          cartCount={cartCount}
-          handleAddToCart={handleAddToCart}
-          setCartCount={setCartCount}
-        />
-      ),
+      element: <CartPage selectedProduct={selectedProduct} />,
     },
     {
       path: "/signup",
-      element: (
-        <SignUp
-          usernameInput={usernameInput}
-          setUsernameInput={setUsernameInput}
-          passwordInput={passwordInput}
-          setPasswordInput={setPasswordInput}
-        />
-      ),
+      element: <SignUp />,
     },
 
     {
       path: "/detail/*",
-      element: (
-        <ProductDetail
-          selectedProduct={selectedProduct}
-          cartCount={cartCount}
-          handleAddToCart={handleAddToCart}
-          setCartCount={setCartCount}
-        />
-      ),
+      element: <ProductDetail selectedProduct={selectedProduct} />,
     },
     {
       path: "/admin/products/edit",

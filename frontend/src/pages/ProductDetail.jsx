@@ -3,14 +3,34 @@ import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
 import ColorSelector from "../components/product-detail/ColorOption";
 import NavBar from "../components/NavBar";
-import { useSelectedProduct } from "../hooks/useSelectedProduct";
+import { useProductStore } from "../hooks/useProductStore";
+import { useCartStore } from "../hooks/useCartStore";
 
-const ProductDetail = ({ handleAddToCart, cartCount, selectedProduct }) => {
+const ProductDetail = (cartCount) => {
   const [quantity, setQuantity] = useState(1);
+  const selectedProduct = useProductStore((state) => state.selectedProduct);
+  const addToCart = useCartStore((state) => state.addToCart);
 
   function handleQuantity(value) {
     if (value === "add") setQuantity((prev) => prev + 1);
     if (value === "minus") setQuantity((prev) => prev - 1);
+  }
+
+  const handleAddToCart = () => {
+    if (selectedProduct) {
+      addToCart(selectedProduct, quantity);
+    }
+  };
+
+  if (!selectedProduct) {
+    return (
+      <div className="bg-white h-screen flex flex-col gap-8">
+        <NavBar />
+        <div className="flex items-center justify-center h-full">
+          <div>No product selected</div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -98,15 +118,17 @@ const ProductDetail = ({ handleAddToCart, cartCount, selectedProduct }) => {
           <div className="flex gap-3 justify-evenly items-center">
             <Link to={"/"}>
               <button
-                onClick={() => handleAddToCart(quantity)}
+                onClick={handleAddToCart}
                 className="border text-sm flex items-center justify-center"
               >
                 <img className="h-12 p-2" src={assets.cartM} alt="" />
               </button>
             </Link>
-            <button className="text-sm p-4 border bg-pm text-white">
-              BUY NOW
-            </button>
+            <Link to={"/cart"}>
+              <button className="text-sm p-4 border bg-pm text-white">
+                BUY NOW
+              </button>
+            </Link>
           </div>
         </div>
       </div>
