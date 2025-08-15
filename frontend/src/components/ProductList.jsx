@@ -1,19 +1,27 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductGrid from "./Products/ProductGrid";
 import FilterOption from "./Products/FilterOption";
-import { useProducts } from "../hooks/useProducts";
+import { useProductsStore } from "../stores/useProductsStore";
 
 const ProductList = React.forwardRef(
   ({ handleAddToCart, setSelectedProduct }, ref) => {
-    const { products, loading, error } = useProducts();
-    const [sortBy, setSortBy] = useState("name");
+    const { products, loading, error, fetchProducts } = useProductsStore();
+    const [sortBy, setSortBy] = useState("default");
 
-    let sortedProducts;
+    useEffect(() => {
+      fetchProducts();
+    }, []);
+
+    console.log(products);
+
+    let sortedProducts = [...products];
+
+    if (sortBy === "default") sortedProducts = products;
 
     if (sortBy === "name")
       sortedProducts = products
         .slice()
-        .sort((a, b) => a.name.localeCompare(b.name));
+        .sort((a, b) => a.product_name.localeCompare(b.product_name));
 
     if (sortBy === "p-l-h")
       sortedProducts = products.sort((a, b) => a.price - b.price);

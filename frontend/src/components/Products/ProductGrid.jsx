@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
+import ProductSkeletonCard from "./ProductSkeletonCard";
 
-const ProductGrid = ({
-  handleAddToCart,
-  products,
-  loading,
-  error,
-  setSelectedProduct,
-}) => {
+const ProductGrid = ({ products, loading, error, setSelectedProduct }) => {
   return (
     <div className="bg-white">
-      <div className="flex flex-wrap h-screen justify-center gap-6 overflow-y-auto">
+      <div className="flex flex-wrap h-screen overflow-y-auto">
         {/* FrontEnd  */}
-        {loading && (
-          <span className="loading loading-bars loading-xl">Loading...</span>
+        {loading && <ProductSkeletonCard />}
+        {products.length === 0 && !error && !loading && (
+          <span>Product not found</span>
         )}
         {error && <span>{error}</span>}
         {products.map((product, index) => (
@@ -21,7 +16,7 @@ const ProductGrid = ({
             item={product}
             setSelectedProduct={setSelectedProduct}
             key={index}
-            name={product.name}
+            name={product.product_name}
             price={product.price}
             img={product.img_url}
           />

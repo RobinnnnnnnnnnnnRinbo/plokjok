@@ -20,7 +20,7 @@ const FilterOption = ({ sortBy, setSortBy }) => {
           <option value="name">Name Aa-Zz</option>
           <option value="p-l-h">Price: Ascending</option>
           <option value="p-h-l">Price: Descending</option>
-          <option value="stock">Stock</option>
+          <option value="default">Default</option>
         </select>
       </div>
     </div>

@@ -1,7 +1,7 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets.js"; // Adjust the path as necessary
-import { useCartStore } from "../hooks/useCartStore.js"; // Assuming you have a custom hook for cart management
+import { useProductsStore } from "../stores/useProductsStore.js";
 
 const TS_BREAKPOINT = 810;
 const TL_BREAKPOINT = 1024;
@@ -9,8 +9,7 @@ const TL_BREAKPOINT = 1024;
 const NavBar = ({ productRef, categoryRef, heroRef, aboutRef }) => {
   const [isSearch, setIsSearch] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const { cart, getTotalItems } = useCartStore();
-
+  const { getTotalItems } = useProductsStore();
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
@@ -129,6 +128,7 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef }) => {
                 className="outline-none w-86/100 px-2 p-1 px-3"
                 placeholder="Search products..."
                 onFocus
+                autoFocus
               />
               <svg
                 onClick={() => setIsSearch((prev) => !prev)}
