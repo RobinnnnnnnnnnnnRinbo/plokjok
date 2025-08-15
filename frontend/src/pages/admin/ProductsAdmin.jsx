@@ -1,43 +1,19 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+
 import { Link } from "react-router-dom";
-import { useProducts } from "../../hooks/useProducts";
+import { useProductsStore } from "../../stores/useProductsStore";
 
-const ProductsAdmin = ({ selectedProduct, setSelectedProduct }) => {
-  const { products, setProducts, loading, error, setLoading } = useProducts();
-  const deleteProducts = async (id) => {
-    setLoading(true);
-    setError("");
-    try {
-      await axios.delete(`http://127.0.0.1:3000/api/products/${id}`);
-      setProducts((prevProducts) =>
-        prevProducts.filter((product) => product.id !== id)
-      );
-    } catch (error) {
-      console.log(error);
-      setError("Failed to delete product. Please try again later.");
-    }
-    setLoading(false);
-  };
+const ProductsAdmin = () => {
+  const { products, error, loading, fetchProducts, selectProduct, log } =
+    useProductsStore();
 
-  const createProduct = async (newProduct) => {
-    setLoading(true);
-    setError("");
-    try {
-      const response = await axios.post(
-        "http://127.0.0.1:3000/api/products",
-        newProduct
-      );
-      setProducts((prevProducts) => [...prevProducts, response.data]);
-    } catch (error) {
-      console.log(error);
-      setError("Failed to create product. Please try again later.");
-    }
-    setLoading(false);
-  };
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
-  function handleEdit(product) {
-    setSelectedProduct(product);
+  function handleClick(id) {
+    selectProduct(id);
+    log();
   }
 
   return (
@@ -79,33 +55,30 @@ const ProductsAdmin = ({ selectedProduct, setSelectedProduct }) => {
             )}
             {products.map((p, idx) => (
               <tr key={p._id || p.id || idx} className="border-t">
-                <td className="px-3 py-2 text-center">{p.id}</td>
+                <td className="px-3 py-2 text-center">{p.product_id}</td>
                 <td className="px-3 py-2 bg-gray-400 flex items-center justify-center">
                   <img
                     src={p.img_url}
-                    alt={p.name}
+                    alt={p.product_name}
                     className="w-12 h-12 object-cover"
                   />
                 </td>
-                <td className="px-3 py-2">{p.name}</td>
+                <td className="px-3 py-2">{p.product_name}</td>
                 <td className="px-3 py-2">${Number(p.price).toFixed(2)}</td>
                 <td className="px-3 py-2">{p.stock ?? p.quantity ?? "-"}</td>
                 <td className="px-3 py-2">
-                  {p.category?.name ?? p.category ?? "-"}
+                  {p.category.charAt(0).toUpperCase() + p.category.slice(1)}
                 </td>
                 <td className="px-3 py-2">
-                  <Link to={`/admin/products/edit`}>
+                  <Link to={``}>
                     <button
-                      onClick={() => handleEdit(p)}
+                      onClick={() => handleClick(p.product_id)}
                       className="px-2 py-1 text-xs bg-blue-600 text-white rounded mr-2"
                     >
                       Edit
                     </button>
                   </Link>
-                  <button
-                    onClick={() => deleteProducts(p.id)}
-                    className="px-2 py-1 text-xs bg-red-600 text-white rounded"
-                  >
+                  <button className="px-2 py-1 text-xs bg-red-600 text-white rounded">
                     Delete
                   </button>
                 </td>

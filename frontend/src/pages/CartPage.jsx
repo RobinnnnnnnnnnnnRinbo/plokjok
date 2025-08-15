@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import NavBar from "../components/NavBar";
 import AnimatedList from "../components/cart-page/AnimatedList";
-import { useCartStore } from "../hooks/useCartStore";
 
-const CartPage = ({ cartCount, setAddToCart}) => {
-  
+const CartPage = ({ cartCount, setAddToCart, items }) => {
   return (
     <div className="h-screen bg-gray-100">
       <NavBar cartCount={cartCount} />

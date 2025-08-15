@@ -1,7 +1,7 @@
 import { pool } from "../database/db.js";
 
 export const getProducts = async (req, res) => {
-  await new Promise((r) => setTimeout(r, 1300)); //API DELAY MOCKUP
+  await new Promise((r) => setTimeout(r, 5000)); //API DELAY MOCKUP
   try {
     const result = await pool.query("SELECT * FROM products");
     res.status(200).json(result.rows);
@@ -29,14 +29,15 @@ export const getProductById = async (req, res) => {
 
 export const createProduct = async (req, res) => {
   const newProduct = req.body;
-  const { name, price, description, img_url } = newProduct;
-  if (!name || !price) {
+  const { product_name, price, img_url, description, stock, category } =
+    newProduct;
+  if (!product_name || !price || !stock) {
     return res.status(400).json({ error: "Name and price are required" });
   }
   try {
     const result = await pool.query(
-      "INSERT INTO products (name, price, description, img_url) VALUES ($1, $2, $3, $4) RETURNING *",
-      [name, price, description, img_url]
+      "INSERT INTO products ( product_name, price, img_url, description, stock, category ) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [product_name, price, img_url, description, stock, category]
     );
     res
       .status(201)

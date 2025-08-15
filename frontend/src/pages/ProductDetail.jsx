@@ -1,42 +1,40 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { assets } from "../assets/assets";
-import ColorSelector from "../components/product-detail/ColorOption";
-import NavBar from "../components/NavBar";
-import { useProductStore } from "../hooks/useProductStore";
-import { useCartStore } from "../hooks/useCartStore";
+// import React, { useState } from "react";
+// import { Link } from "react-router-dom";
+// import { assets } from "../assets/assets";
+// import ColorSelector from "../components/product-detail/ColorOption";
+// import NavBar from "../components/NavBar";
+// import { useCartStore } from "../stores/useCartStore.js";
 
 const ProductDetail = (cartCount) => {
-  const [quantity, setQuantity] = useState(1);
-  const selectedProduct = useProductStore((state) => state.selectedProduct);
-  const addToCart = useCartStore((state) => state.addToCart);
+  // const [quantity, setQuantity] = useState(1);
+  // const addToCart = useCartStore((state) => state.addToCart);
 
-  function handleQuantity(value) {
-    if (value === "add") setQuantity((prev) => prev + 1);
-    if (value === "minus") setQuantity((prev) => prev - 1);
-  }
+  // function handleQuantity(value) {
+  //   if (value === "add") setQuantity((prev) => prev + 1);
+  //   if (value === "minus") setQuantity((prev) => prev - 1);
+  // }
 
-  const handleAddToCart = () => {
-    if (selectedProduct) {
-      addToCart(selectedProduct, quantity);
-    }
-  };
+  // const handleAddToCart = () => {
+  //   if (selectedProduct) {
+  //     addToCart(selectedProduct, quantity);
+  //   }
+  // };
 
-  if (!selectedProduct) {
-    return (
-      <div className="bg-white h-screen flex flex-col gap-8">
-        <NavBar />
-        <div className="flex items-center justify-center h-full">
-          <div>No product selected</div>
-        </div>
-      </div>
-    );
-  }
+  // if (!selectedProduct) {
+  //   return (
+  //     <div className="bg-white h-screen flex flex-col gap-8">
+  //       <NavBar />
+  //       <div className="flex items-center justify-center h-full">
+  //         <div>No product selected</div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="bg-white h-screen flex flex-col gap-8">
       <NavBar cartCount={cartCount} />
-      <div className="flex flex-col h-full gap-8 mt-18">
+      {/* <div className="flex flex-col h-full gap-8 mt-18">
         <div className="h-[40vh] bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center mx-4">
           <img
             className="max-w-full max-h-full object-contain"
@@ -131,10 +129,9 @@ const ProductDetail = (cartCount) => {
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
 
 export default ProductDetail;
-

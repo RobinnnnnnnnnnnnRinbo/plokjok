@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import NavBar from "../components/NavBar";
 import HeroSection from "../components/HeroSection";
 import Category from "../components/Category";

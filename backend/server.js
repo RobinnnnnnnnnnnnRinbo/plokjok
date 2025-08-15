@@ -4,7 +4,9 @@ import helmet from "helmet";
 import aj from "./lib/arcjet.js";
 import morgan from "morgan";
 import productRoute from "./routes/productRoute.js";
+import userRoute from "./routes/userRoute.js";
 import { pool } from "./database/db.js";
+import { createTables } from "./database/schema.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,49 +16,40 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 
-app.use(async (req, res, next) => {
-  try {
-    const decision = await aj.protect(req, { requested: 1 });
-    if (decision.isDenied()) {
-      if (decision.reason.isRateLimit()) {
-        return res
-          .status(429)
-          .json({ message: "Rate limit exceeded. Try again later." });
-      }
-      if (decision.reason.isBot()) {
-        return res.status(403).json({ message: "Access denied for bots." });
-      }
-      return res.status(403).json({ message: "Access denied." });
-    }
-    if (
-      decision.results.some(
-        (result) => result.reason.isBot() && result.reason.isSpoofed()
-      )
-    ) {
-      return res.status(403).json({ message: "Spoof bot detected" });
-    }
-    next();
-  } catch (error) {
-    console.error("Arcjet protection error:", error);
-    return next(error);
-  }
-});
+// app.use(async (req, res, next) => {
+//   try {
+//     const decision = await aj.protect(req, { requested: 1 });
+//     if (decision.isDenied()) {
+//       if (decision.reason.isRateLimit()) {
+//         return res
+//           .status(429)
+//           .json({ message: "Rate limit exceeded. Try again later." });
+//       }
+//       if (decision.reason.isBot()) {
+//         return res.status(403).json({ message: "Access denied for bots." });
+//       }
+//       return res.status(403).json({ message: "Access denied." });
+//     }
+//     if (
+//       decision.results.some(
+//         (result) => result.reason.isBot() && result.reason.isSpoofed()
+//       )
+//     ) {
+//       return res.status(403).json({ message: "Spoof bot detected" });
+//     }
+//     next();
+//   } catch (error) {
+//     console.error("Arcjet protection error:", error);
+//     return next(error);
+//   }
+// });
 
 app.use("/api/products", productRoute);
+app.use("/api/users", userRoute);
 
 const connectDB = async () => {
   try {
-    await pool.query(`
-      CREATE TABLE IF NOT EXISTS products (
-        product_id SERIAL PRIMARY KEY,
-        product_name VARCHAR(100) NOT NULL,
-        description TEXT,
-        stock INT NOT NULL,
-        category VARCHAR(50),
-        price NUMERIC(10, 2) NOT NULL,
-        img_url VARCHAR(255),
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )`);
+    await createTables(pool);
     console.log("Database connected successfully");
   } catch (error) {
     console.log(`Failed to initialize database: ${error.message}`);
@@ -69,7 +62,7 @@ connectDB();
 
 // Routes
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server is running on http://192.168.0.196:${PORT}`);
   console.log("CORS enabled for all origins");
 });
