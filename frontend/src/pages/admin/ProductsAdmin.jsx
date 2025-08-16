@@ -9,7 +9,7 @@ const ProductsAdmin = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function handleClick(id) {
     selectProduct(id);
@@ -60,7 +60,7 @@ const ProductsAdmin = () => {
                   <img
                     src={p.img_url}
                     alt={p.product_name}
-                    className="w-12 h-12 object-cover"
+                    className="w-12 h-12 object-contain"
                   />
                 </td>
                 <td className="px-3 py-2">{p.product_name}</td>

@@ -10,7 +10,7 @@ const ProductList = React.forwardRef(
 
     useEffect(() => {
       fetchProducts();
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     console.log(products);
 

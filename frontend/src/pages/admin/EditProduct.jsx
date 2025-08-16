@@ -1,65 +1,75 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useProductsStore } from "../../stores/useProductsStore";
 
-const EditProduct = ({ selectedProduct, setSelectedProduct }) => {
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setSelectedProduct((prev) => ({ ...prev, [name]: value }));
-  };
+const EditProduct = () => {
+  const [productName, setProductName] = useState("");
+  const [price, setPrice] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
+  const [stock, setStock] = useState("");
+  const [category, setCategory] = useState("mice");
+  const [description, setDescription] = useState("");
 
+  const { loading } = useProductsStore();
+
+  function handleSubmit() {}
   return (
-    <div className="bg-white h-screen">
-      <h1 className="text-2xl font-bold text-center mb-4">Edit Product</h1>
-      <div className="max-w-md mx-auto">
-        <label className="block mb-2">
-          Product Name
-          <input
-            name="name"
-            onChange={handleInputChange}
-            type="text"
-            value={selectedProduct?.name || ""}
-            className="mt-1 block w-full border border-gray-300 rounded p-2"
-          />
-        </label>
-        <label className="block mb-2">
-          Image URL
-          <input
-            name="img_url"
-            onChange={handleInputChange}
-            type="text"
-            value={selectedProduct?.img_url || ""}
-            className="mt-1 block w-full border border-gray-300 rounded p-2"
-          />
-        </label>
-        <label className="block mb-2">
-          Price
-          <input
-            name="price"
-            onChange={handleInputChange}
-            type="number"
-            value={selectedProduct?.price || ""}
-            className="mt-1 block w-full border border-gray-300 rounded p-2"
-          />
-        </label>
-        <label className="block mb-2">
-          Description
-          <textarea
-            name="description"
-            onChange={handleInputChange}
-            value={selectedProduct?.description || ""}
-            className="mt-1 block w-full border border-gray-300 rounded p-2"
-          />
-        </label>
-        <Link to="/admin/products">
-          <button
-    
-            className="mt-4 w-full bg-blue-600 text-white rounded p-2"
-            disabled={!selectedProduct}
-          >
-            Save Changes
-          </button>
-        </Link>
-      </div>
-    </div>
+    <form onSubmit={handleSubmit} className="h-screen flex flex-col text-white">
+      <label htmlFor="">Product Name</label>
+      <input
+        className="bg-gray-100 outline-none text-black"
+        type="text"
+        onChange={(e) => setProductName(e.target.value)}
+        value={productName}
+      />
+      <label htmlFor="">Price</label>
+      <input
+        className="bg-gray-100 outline-none text-black"
+        type="text"
+        onChange={(e) => setPrice(e.target.value)}
+        value={price}
+      />
+      <img src={imgUrl ? imgUrl : null} alt="" />
+      <label htmlFor="">ImageURL</label>
+      <input
+        className="bg-gray-100 outline-none text-black"
+        type="text"
+        onChange={(e) => setImgUrl(e.target.value)}
+        value={imgUrl}
+      />
+      <label htmlFor="">Description</label>
+      <input
+        className="bg-gray-100 outline-none text-black"
+        type="text"
+        onChange={(e) => setDescription(e.target.value)}
+        value={description}
+      />
+      <label htmlFor="">Stock</label>
+      <input
+        className="bg-gray-100 outline-none text-black"
+        type="text"
+        onChange={(e) => setStock(e.target.value)}
+        value={stock}
+      />
+      <label htmlFor="">Category</label>
+      <select
+        className="bg-gray-100 outline-none text-black"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+      >
+        <option value="mice">Mice</option>
+        <option value="keyboards">Keyboards</option>
+        <option value="controllers">Controllers</option>
+        <option value="nukes">Nukes</option>
+      </select>
+      <button
+        type="submit"
+        disabled={loading} // Disable when loading
+        className="bg-white text-black m-2 p-1 active:bg-gray-500 disabled:opacity-50"
+      >
+        {loading ? "Creating..." : "Create"}
+      </button>
+    </form>
   );
 };
 

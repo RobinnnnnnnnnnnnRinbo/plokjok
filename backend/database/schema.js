@@ -1,3 +1,6 @@
+import debug from "debug";
+
+const createTableDebug = debug("database:create_table");
 export const createTables = async (pool) => {
   const tables = [
     // Products table
@@ -52,9 +55,9 @@ export const createTables = async (pool) => {
     for (const table of tables) {
       await pool.query(table);
     }
-    console.log("All tables created successfully");
+    createTableDebug("All tables created successfully");
   } catch (error) {
-    console.error("Error creating tables:", error);
+    createTableDebug("Error creating tables:", error);
     throw error;
   }
 };

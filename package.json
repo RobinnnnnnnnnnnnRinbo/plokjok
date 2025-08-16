@@ -8,7 +8,7 @@
     "server": "nodemon backend/server.js",
     "client": "cd frontend && npm run dev",
     "build": "react-scripts build",
-    "web": "nodemon backend/server.js & cd frontend && npm run dev"
+    "web": "DEBUG=app:*,database:* nodemon backend/server.js & cd frontend && npm run dev"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +22,7 @@
     "@arcjet/node": "^1.0.0-beta.10",
     "axios": "^1.11.0",
     "cors": "^2.8.5",
+    "debug": "^4.4.1",
     "dotenv": "^17.0.1",
     "express": "^5.1.0",
     "helmet": "^8.1.0",

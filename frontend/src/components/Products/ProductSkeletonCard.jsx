@@ -40,7 +40,8 @@ const ProductSkeletonCard = () => {
               {/* Buy Buttons */}
               <div className="flex gap-2">
                 <Skeleton circle width={40} height={40} /> {/* Cart button */}
-                <Skeleton width={110} height={40} /> {/* Buy now button */}
+                <Skeleton borderRadius={50} width={110} height={40} />{" "}
+                {/* Buy now button */}
               </div>
             </div>
           </div>

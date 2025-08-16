@@ -53,12 +53,26 @@ export const useProductsStore = create((set, get) => ({
       throw error;
     }
   },
-  editProduct: async (id) => {
-    const product = get().products.map((p) => {
-      if (p.product_id === id) {
-        return {};
-      }
-    });
+  editProduct: async (productData) => {
+    set({ loading: true, error: null });
+    try {
+      const res = await axios.put(
+        "http://192.168.0.196:3000/api/products/:id",
+        productData
+      );
+      set((state) => ({
+        products: [...state.products, res.data],
+        loading: false,
+        error: null,
+      }));
+      return res.data;
+    } catch (error) {
+      set({
+        loading: false,
+        error: error.message || "Failed to create product.",
+      });
+      throw error;
+    }
   },
 
   addToCart: (product, quantity = 1) =>
