@@ -12,8 +12,6 @@ const ProductList = React.forwardRef(
       fetchProducts();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    console.log(products);
-
     let sortedProducts = [...products];
 
     if (sortBy === "default") sortedProducts = products;

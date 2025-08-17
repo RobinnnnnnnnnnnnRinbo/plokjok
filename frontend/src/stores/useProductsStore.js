@@ -25,6 +25,7 @@ export const useProductsStore = create((set, get) => ({
     }
   },
 
+
   selectProduct: (id) => {
     const product = get().products.find((p) => p.product_id === id);
     set({
@@ -129,8 +130,5 @@ export const useProductsStore = create((set, get) => ({
 
   clearCart: () => set({ cart: [] }),
 
-  log: () => {
-    const selectedProduct = get().selectedProduct;
-    console.log(selectedProduct);
-  },
+  log: () => {},
 }));

@@ -1,23 +1,55 @@
 import { create } from "zustand";
+import axios from "axios";
 
 export const useAuthStore = create((set, get) => ({
-  users: [
-    {
-      username: "Leo Messi",
-      email: "hello@example.com",
-      password: "ASDqwert!@##123",
-      isAuth: true,
-    },
-  ],
+  users: [],
+  loading: null,
+  error: null,
   authUser: [],
 
-  createUser: (username, email, password) => {
-    set((state) => ({
-      users: [...state.users, { username, email, password }],
-      authUser: { username, email, password, isAuth: true },
-    }));
-    console.log("Creating user:", username, email, password);
+  fetchUsers: async () => {
+    try {
+      set({ loading: true, error: null });
+      const res = await axios.get("http://192.168.0.196:3000/api/users");
+      set({ users: res.data, loading: false, error: null });
+    } catch (error) {
+      set({
+        loading: false,
+        error: error.message || "Failed to fetch users",
+      });
+    }
   },
+
+  setAuthUserFromStorage: () => {
+    const storedUser = localStorage.getItem("authUser");
+    if (storedUser) {
+      set({ authUser: JSON.parse(storedUser) });
+    }
+  },
+
+  createUser: async (userData) => {
+    try {
+      set({ loading: true, error: null });
+      const res = await axios.post(
+        "http://192.168.0.196:3000/api/users/register",
+        userData
+      );
+      set((state) => ({
+        users: [...state.users, res.data],
+        authUser: { userData, is_auth: true },
+        loading: true,
+        error: null,
+      }));
+      console.log("Creating user:", userData);
+      return res.data;
+    } catch (error) {
+      set({
+        loading: false,
+        error: error.message || "Failed to fetch users",
+      });
+    }
+  },
+
   logInCheck: (username, email, password) => {
     console.log("Logging in with:", username || email, password);
     if (!username || (!email && !password)) {
@@ -34,12 +66,19 @@ export const useAuthStore = create((set, get) => ({
     }
     set((state) => ({
       ...state,
-      authUser: { ...user, isAuth: true },
+      authUser: { ...user, is_auth: true },
     }));
+    localStorage.setItem(
+      "authUser",
+      JSON.stringify({ ...user, is_auth: true })
+    );
     return { success: true };
   },
 
-  logout: () => set((state) => ({ ...state, authUser: null })),
+  logout: () => {
+    set({ authUser: null });
+    localStorage.removeItem("authUser");
+  },
   log: () => {
     console.log("All users:", get().users);
     console.log("Authenticated user:", get().authUser);

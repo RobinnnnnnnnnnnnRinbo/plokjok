@@ -54,39 +54,49 @@ const SignUp = () => {
   const validEmail = validateEmail();
   const validPass = validatePassword();
 
-  function handleSignUp() {
-    if (!username || !email || !password) {
-      setAlert("Please fill in all fields");
-      triggerAlert();
-      return;
-    }
-    if (password !== confirmPassword) {
-      setAlert("Passwords don't match");
-      triggerAlert();
-      return;
-    }
-    if (!validEmail) {
-      setAlert("Invalid Email");
-      triggerAlert();
-      return;
-    }
-    if (!validPass) {
-      setAlert(
-        "Password atleast 8 character, include numbers, specials (e.g. !@#$%..) "
-      );
-      triggerAlert();
-      return;
-    }
+  const handleSignUp = async () => {
+    try {
+      if (!username || !email || !password) {
+        setAlert("Please fill in all fields");
+        triggerAlert();
+        return;
+      }
+      if (password !== confirmPassword) {
+        setAlert("Passwords don't match");
+        triggerAlert();
+        return;
+      }
+      if (!validEmail) {
+        setAlert("Invalid Email");
+        triggerAlert();
+        return;
+      }
+      if (!validPass) {
+        setAlert(
+          "Password atleast 8 character, include numbers, specials (e.g. !@#$%..) "
+        );
+        triggerAlert();
+        return;
+      }
 
-    createUser(username, email, password);
-    setUsername("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
-    setAlert("Successfully Registered");
-    triggerAlert();
-    navigate("/login");
-  }
+      const userData = {
+        username: username,
+        email: email,
+        password: password,
+      };
+
+      await createUser(userData);
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      setAlert("Successfully Registered");
+      triggerAlert();
+      navigate("/login");
+    } catch (error) {
+      console.log("Error sign up user:", error);
+    }
+  };
 
   return (
     <div className="flex bg-white flex-col h-screen">

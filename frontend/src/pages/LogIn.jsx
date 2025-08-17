@@ -6,6 +6,7 @@ import LogInButton from "../components/login/LogInButton";
 import AuthButton from "../components/login/AuthButton";
 
 import { useAuthStore } from "../stores/useAuthStore";
+import { useEffect } from "react";
 
 const LogIn = () => {
   const [identifier, setIdentifier] = useState("");
@@ -16,7 +17,11 @@ const LogIn = () => {
   const [mountAlert, setMountAlert] = useState(false);
   const navigate = useNavigate();
 
-  const { logInCheck, log } = useAuthStore();
+  const { fetchUsers, logInCheck, log } = useAuthStore();
+
+  useEffect(() => {
+    fetchUsers();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const formRef = useRef();
 

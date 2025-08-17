@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Importing components and pages
@@ -13,9 +13,19 @@ import EditProduct from "./pages/admin/EditProduct.jsx";
 import AdminPage from "./pages/admin/AdminPage.jsx";
 import CreateProduct from "./pages/admin/CreateProduct.jsx";
 
-const App = () => {
+import { useAuthStore } from "./stores/useAuthStore.js";
+import UserProfile from "./pages/UserProfile.jsx";
 
+const App = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const setAuthUserFromStorage = useAuthStore(
+    (state) => state.setAuthUserFromStorage
+  );
+
+  useEffect(() => {
+    setAuthUserFromStorage();
+  }, []);
 
   const router = createBrowserRouter([
     {
@@ -25,6 +35,10 @@ const App = () => {
     {
       path: "/login",
       element: <LogIn />,
+    },
+    {
+      path: "/profile",
+      element: <UserProfile />,
     },
     {
       path: "/cart",
@@ -74,4 +88,3 @@ const App = () => {
 };
 
 export default App;
-
