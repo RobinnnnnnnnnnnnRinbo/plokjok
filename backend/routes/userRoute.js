@@ -1,4 +1,4 @@
-import router from "./productRoute.js";
+import express from "express";
 import {
   getUsers,
   createUser,
@@ -8,11 +8,13 @@ import {
   deleteUser,
 } from "../controller/userController.js";
 
+const router = express.Router();
+
 // Get all users (admin only)
 router.get("/", getUsers);
 
 // Get user by ID
-router.get("/:id", getUserById);
+router.get("/:user_id", getUserById);
 
 // Create new user (register)
 router.post("/register", createUser);
@@ -21,9 +23,9 @@ router.post("/register", createUser);
 router.post("/login", loginUser);
 
 // Update user
-router.put("/:id", updateUser);
+router.put("/:user_id", updateUser);
 
 // Delete user
-router.delete("/:id", deleteUser);
+router.delete("/:user_id", deleteUser);
 
 export default router;
