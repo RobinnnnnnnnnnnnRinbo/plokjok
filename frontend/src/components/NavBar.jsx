@@ -10,7 +10,7 @@ const TL_BREAKPOINT = 1024;
 const NavBar = ({ productRef, categoryRef, heroRef, aboutRef }) => {
   const [isSearch, setIsSearch] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const { getTotalItems } = useProductsStore();
+  const { getTotalItems, log } = useProductsStore();
 
   const { authUser } = useAuthStore();
 
@@ -29,6 +29,10 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef }) => {
     const drawerCheckbox = document.getElementById("my-drawer");
     if (drawerCheckbox) drawerCheckbox.checked = false;
   };
+
+  function handleCartClick() {
+    log();
+  }
 
   return (
     <div className="flex justify-center ">
@@ -113,14 +117,14 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef }) => {
 
         <div className="hidden ts:flex justify-center gap-6">
           {!isSearch ? (
-            <span>Home</span>
+            <span onClick={() => handleScroll(heroRef, 80)}>Home</span>
           ) : (
             windowWidth >= TL_BREAKPOINT && <span>Home</span>
           )}
-          <span>Category</span>
-          <span>Product</span>
-          <span>Contact</span>
-          <span>About</span>
+          <span onClick={() => handleScroll(categoryRef, 80)}>Category</span>
+          <span onClick={() => handleScroll(productRef, 80)}>Product</span>
+          {/* <span onClick={() => handleScroll(contactRef, 80)}>Contact</span> */}
+          <span onClick={() => handleScroll(aboutRef, 80)}>About</span>
         </div>
 
         <div className="flex items-center gap-4 lg:gap-6 justify-end">
@@ -178,7 +182,13 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef }) => {
               {getTotalItems()}
             </div>
             <Link to={"/cart"}>
-              <img type="button" className="h-7" src={assets.cartM} alt="" />
+              <img
+                onClick={() => handleCartClick()}
+                type="button"
+                className="h-7"
+                src={assets.cartM}
+                alt=""
+              />
             </Link>
           </div>
           <Link to={`${authUser?.is_auth ? `/profile` : `/login`}`}>
@@ -187,7 +197,11 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef }) => {
               className={`h-7 ${
                 authUser?.is_auth ? `bg-gray-300 rounded-full p-1` : null
               }`}
-              src={authUser?.is_auth ? `https://static.vecteezy.com/system/resources/thumbnails/008/926/993/small_2x/black-cat-with-green-eyes-peeking-out-vector.jpg` : assets.userM}
+              src={
+                authUser?.is_auth
+                  ? `https://static.vecteezy.com/system/resources/thumbnails/008/926/993/small_2x/black-cat-with-green-eyes-peeking-out-vector.jpg`
+                  : assets.userM
+              }
               alt=""
             />
           </Link>

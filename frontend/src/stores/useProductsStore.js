@@ -11,7 +11,7 @@ export const useProductsStore = create((set, get) => ({
   fetchProducts: async () => {
     set({ loading: true, error: null });
     try {
-      const res = await axios.get("http://192.168.0.196:3000/api/products");
+      const res = await axios.get(`http://192.168.0.172:3000/api/products`);
       set({
         products: res.data,
         loading: false,
@@ -37,7 +37,7 @@ export const useProductsStore = create((set, get) => ({
     set({ loading: true, error: null });
     try {
       const res = await axios.post(
-        "http://192.168.0.196:3000/api/products",
+        "http://localhost:3000/api/products",
         productData
       );
       set((state) => ({
@@ -58,7 +58,7 @@ export const useProductsStore = create((set, get) => ({
     set({ loading: true, error: null });
     try {
       const res = await axios.put(
-        "http://192.168.0.196:3000/api/products/:id",
+        "http://localhost:3000/api/products/:id",
         productData
       );
       set((state) => ({
@@ -130,5 +130,10 @@ export const useProductsStore = create((set, get) => ({
 
   clearCart: () => set({ cart: [] }),
 
-  log: () => {},
+  log: () => {
+    const state = get();
+    console.log("Products:", state.products);
+    console.log("Cart:", state.cart);
+    console.log("Selected Product:", state.selectedProduct);
+  },
 }));

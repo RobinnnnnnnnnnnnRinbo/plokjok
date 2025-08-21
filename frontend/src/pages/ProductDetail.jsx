@@ -1,45 +1,32 @@
-// import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-// import { assets } from "../assets/assets";
-// import ColorSelector from "../components/product-detail/ColorOption";
-// import NavBar from "../components/NavBar";
-// import { useCartStore } from "../stores/useCartStore.js";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { assets } from "../assets/assets";
+import ColorSelector from "../components/product-detail/ColorOption";
+import NavBar from "../components/NavBar";
+import { useProductsStore } from "../stores/useProductsStore";
 
 const ProductDetail = (cartCount) => {
-  // const [quantity, setQuantity] = useState(1);
-  // const addToCart = useCartStore((state) => state.addToCart);
+  const [quantity, setQuantity] = useState(1);
+  const { selectedProduct, addToCart } = useProductsStore();
 
-  // function handleQuantity(value) {
-  //   if (value === "add") setQuantity((prev) => prev + 1);
-  //   if (value === "minus") setQuantity((prev) => prev - 1);
-  // }
+  function handleQuantity(value) {
+    if (value === "add") setQuantity((prev) => prev + 1);
+    if (value === "minus") setQuantity((prev) => prev - 1);
+  }
 
-  // const handleAddToCart = () => {
-  //   if (selectedProduct) {
-  //     addToCart(selectedProduct, quantity);
-  //   }
-  // };
-
-  // if (!selectedProduct) {
-  //   return (
-  //     <div className="bg-white h-screen flex flex-col gap-8">
-  //       <NavBar />
-  //       <div className="flex items-center justify-center h-full">
-  //         <div>No product selected</div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  function handleAddToCart(selectedProduct, quantity) {
+    addToCart(selectedProduct, quantity);
+  }
 
   return (
     <div className="bg-white h-screen flex flex-col gap-8">
       <NavBar cartCount={cartCount} />
-      {/* <div className="flex flex-col h-full gap-8 mt-18">
+      <div className="flex flex-col h-full gap-8 mt-18">
         <div className="h-[40vh] bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center mx-4">
           <img
             className="max-w-full max-h-full object-contain"
             src={selectedProduct?.img_url}
-            alt={selectedProduct?.name || "Product image"}
+            alt=""
           />
         </div>
         <div className="h-1/10 -mt-5 flex gap-3 px-4">
@@ -47,34 +34,34 @@ const ProductDetail = (cartCount) => {
             <img
               className="max-w-full max-h-full object-contain"
               src={selectedProduct?.img_url}
-              alt={selectedProduct?.name || "Product image"}
+              alt=""
             />
           </div>
           <div className="bg-gray-200 rounded h-full w-1/4 flex items-center justify-center">
             <img
               className="max-w-full max-h-full object-contain"
               src={selectedProduct?.img_url}
-              alt={selectedProduct?.name || "Product image"}
+              alt=""
             />
           </div>
           <div className="bg-gray-200 rounded h-full w-1/4 flex items-center justify-center">
             <img
               className="max-w-full max-h-full object-contain"
               src={selectedProduct?.img_url}
-              alt={selectedProduct?.name || "Product image"}
+              alt=""
             />
           </div>
           <div className="bg-gray-200 rounded h-full w-1/4 flex items-center justify-center">
             <img
               className="max-w-full max-h-full object-contain"
               src={selectedProduct?.img_url}
-              alt={selectedProduct?.name || "Product image"}
+              alt=""
             />
           </div>
         </div>
         <div className="flex justify-between items-center px-4">
           <div className="">
-            <span className="text-lg">{selectedProduct?.name}</span>
+            <span className="text-lg">{selectedProduct?.product_name}</span>
             <div className="flex items-center gap-2">
               <img className="h-4" src={assets.star} alt="" />
               <span className="text-xs">4.5/5</span>
@@ -90,7 +77,7 @@ const ProductDetail = (cartCount) => {
         <div className="w-full ">
           <span className="px-4">Description:</span>
           <p className="text-sm px-8 italic text-gray-500">
-            {selectedProduct?.description || "No description available."}
+            {selectedProduct?.description}
           </p>
         </div>
 
@@ -116,7 +103,7 @@ const ProductDetail = (cartCount) => {
           <div className="flex gap-3 justify-evenly items-center">
             <Link to={"/"}>
               <button
-                onClick={handleAddToCart}
+                onClick={() => handleAddToCart(selectedProduct, quantity)}
                 className="border text-sm flex items-center justify-center"
               >
                 <img className="h-12 p-2" src={assets.cartM} alt="" />
@@ -129,7 +116,7 @@ const ProductDetail = (cartCount) => {
             </Link>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

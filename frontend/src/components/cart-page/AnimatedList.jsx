@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+// eslint-disable-next-line
 import { motion, useInView } from "motion/react";
 import { assets } from "../../assets/assets";
 
@@ -128,12 +129,12 @@ const AnimatedList = ({
   }
 
   return (
-    <div className={`relative w-[500px] ${className}`}>
+    <div className={`relative w-[95vw] mx-auto mt-3  ${className}`}>
       <div
         ref={listRef}
-        className={`max-h-[70vh] overflow-y-auto p-4 ${
+        className={`max-h-[70vh] overflow-y-auto ${
           displayScrollbar
-            ? "[&::-webkit-scrollbar]:w-[8px] [&::-webkit-scrollbar-track]:bg-[#060010] [&::-webkit-scrollbar-thumb]:bg-[#222] [&::-webkit-scrollbar-thumb]:rounded-[4px]"
+            ? "[&::-webkit-scrollbar]:max-w-[8px] [&::-webkit-scrollbar-track]:bg-[#060010] [&::-webkit-scrollbar-thumb]:bg-[#222] [&::-webkit-scrollbar-thumb]:rounded-[4px]"
             : "scrollbar-hide"
         }`}
         onScroll={handleScroll}
@@ -156,8 +157,8 @@ const AnimatedList = ({
             }}
           >
             <div
-              className={`p-4 bg-gray-50 rounded-lg flex relative ${
-                selectedIndex === index ? "bg-[#222]" : ""
+              className={`p-4 bg-white shadow-sm max-h-[15vh] rounded-lg w-[95vw] flex justify-between relative ${
+                selectedIndex === index ? "bg-white" : ""
               } ${itemClassName}`}
             >
               <img
@@ -165,21 +166,25 @@ const AnimatedList = ({
                 src={assets.delete}
                 alt=""
               />
-              <div className="flex items-center cursor-pointer">
-                <img className="h-14" src={item.img_url} alt={item.name} />
+              <div className="flex items-center cursor-pointer flex-shrink-0">
+                <img
+                  className="w-[15vw] min-w-[60px] max-w-[100px] h-auto flex-shrink-0"
+                  src={item.img_url}
+                  alt={item.name}
+                />
               </div>
-              <div className="flex flex-col justify-between ml-4 h-22">
-                <span>{item.name}</span>
+              <div className="flex flex-col items-start w-[35vw] justify-between h-22">
+                <span className="">{item.product_name}</span>
                 <p className="text-gray-500 text-xs">
                   Color: {capitalizeFirstLetter(item.color)}
                 </p>
                 <span>${item.price}</span>
               </div>
-              <div className="flex w-1/2 items-end justify-evenly">
+              <div className="flex w-1/3 items-end justify-evenly">
                 <button className="bg-pm p-1 px-3 rounded-lg text-white">
                   -
                 </button>
-                <span>0</span>
+                <span className="flex items-center h-8">{item.quantity}</span>
                 <button className="bg-pm p-1 px-3 rounded-lg text-white">
                   +
                 </button>

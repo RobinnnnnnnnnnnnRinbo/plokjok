@@ -4,7 +4,7 @@ import ProductSkeletonCard from "./ProductSkeletonCard";
 const ProductGrid = ({ products, loading, error, setSelectedProduct }) => {
   return (
     <div className="bg-white">
-      <div className="flex flex-wrap h-screen overflow-y-auto">
+      <div className="flex flex-wrap max-h-screen scroll overflow-y-auto ts:mx-4">
         {/* FrontEnd  */}
         {loading && <ProductSkeletonCard />}
         {products.length === 0 && !error && !loading && (

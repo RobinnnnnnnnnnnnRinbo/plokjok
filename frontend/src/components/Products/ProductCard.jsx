@@ -5,21 +5,27 @@ import { StarReviews } from "./StarReviews";
 import { useProductsStore } from "../../stores/useProductsStore";
 
 const ProductCard = ({ name, price, img, item, description }) => {
-  const { addToCart } = useProductsStore();
+  const { addToCart, log, selectProduct } = useProductsStore();
 
   const handleAddToCart = () => {
     addToCart(item, 1);
   };
 
   return (
-    <div className="w-48 max-h-90 mx-auto bg-white rounded-lg border border-gray-500 overflow-hidden flex flex-col my-2">
+    <div className="w-46 max-h-94 mx-auto bg-white rounded-lg border border-gray-500 overflow-hidden flex flex-col my-2">
       {/* Product Image */}
       <div className="bg-gray-50 p-2 flex justify-center items-center flex-1">
-        <img
-          src={img}
-          alt="Fresh watermelon cut in half showing red flesh"
-          className="w-36 h-36 object-contain"
-        />
+        <Link to={"/detail"}>
+          <img
+            onClick={() => {
+              selectProduct(item.product_id);
+              log();
+            }}
+            src={img}
+            alt="Fresh watermelon cut in half showing red flesh"
+            className="w-36 h-36 object-contain"
+          />
+        </Link>
       </div>
 
       {/* Product Details */}

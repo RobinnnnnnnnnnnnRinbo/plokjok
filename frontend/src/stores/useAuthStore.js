@@ -10,7 +10,7 @@ export const useAuthStore = create((set, get) => ({
   fetchUsers: async () => {
     try {
       set({ loading: true, error: null });
-      const res = await axios.get("http://192.168.0.196:3000/api/users");
+      const res = await axios.get("http://192.168.0.172:3000/api/users");
       set({ users: res.data, loading: false, error: null });
     } catch (error) {
       set({
@@ -31,7 +31,7 @@ export const useAuthStore = create((set, get) => ({
     try {
       set({ loading: true, error: null });
       const res = await axios.post(
-        "http://192.168.0.196:3000/api/users/register",
+        "http://192.168.0.172:3000/api/users/register",
         userData
       );
       set((state) => ({

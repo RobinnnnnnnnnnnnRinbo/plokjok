@@ -68,6 +68,6 @@ connectDB();
 // Routes
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server is running on http://192.168.0.196:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
   corsDebug("CORS enabled for all origins");
 });

@@ -4,12 +4,12 @@ import "react-loading-skeleton/dist/skeleton.css";
 const ProductSkeletonCard = () => {
   return (
     <SkeletonTheme baseColor="#e4e4e4ff" highlightColor="#f0f0f0ff">
-      {Array(6)
+      {Array(12)
         .fill(0)
         .map((_, index) => (
           <div
             key={index}
-            className="w-48 max-h-90 mx-auto bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col my-2"
+            className="w-46 max-h-90 mx-auto bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col my-2"
           >
             {/* Product Image */}
             <div className="p-2 flex justify-center items-center flex-1">
