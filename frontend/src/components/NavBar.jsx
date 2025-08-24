@@ -194,6 +194,7 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef }) => {
           <Link to={`${authUser?.is_auth ? `/profile` : `/login`}`}>
             <img
               type="button"
+              onClick={log()}
               className={`h-7 ${
                 authUser?.is_auth ? `bg-gray-300 rounded-full p-1` : null
               }`}

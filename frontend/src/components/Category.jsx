@@ -43,7 +43,7 @@ const Category = React.forwardRef((props, ref) => {
         <div className="bg-[#ededed] rounded-xl p-18 h-[175px] w-[150px] md:w-[70px] flex flex-col justify-center items-center md:max-w-[70px]">
           <img
             className="min-h-[120px] min-w-[80px] active:min-w-[100px] hover:min-w-[100px] cursor-pointer duration-300 max-w-full max-h-full object-contain"
-            src={assets.nukecateg}
+            src={assets.hpcateg}
             alt=""
           />
           <span className="mb-4">Nukes</span>

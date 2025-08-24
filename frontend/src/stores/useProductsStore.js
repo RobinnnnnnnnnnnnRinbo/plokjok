@@ -7,6 +7,7 @@ export const useProductsStore = create((set, get) => ({
   loading: null,
   error: null,
   selectedProduct: null,
+  selectedCartProduct: null, 
 
   fetchProducts: async () => {
     set({ loading: true, error: null });
