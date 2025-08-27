@@ -195,15 +195,11 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef }) => {
             <img
               type="button"
               onClick={log()}
-              className={`h-7 ${
-                authUser?.is_auth ? `bg-gray-300 rounded-full p-1` : null
+              className={`h-7 w-7 ${
+                authUser?.is_auth ? `bg-gray-300 rounded-full border` : null
               }`}
-              src={
-                authUser?.is_auth
-                  ? `https://static.vecteezy.com/system/resources/thumbnails/008/926/993/small_2x/black-cat-with-green-eyes-peeking-out-vector.jpg`
-                  : assets.userM
-              }
-              alt=""
+              src={authUser?.is_auth ? assets.default : assets.userM}
+              alt="profile"
             />
           </Link>
         </div>

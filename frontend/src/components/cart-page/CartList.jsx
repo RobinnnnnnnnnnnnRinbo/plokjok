@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { assets } from "../../assets/assets";
+import { useProductsStore } from "../../stores/useProductsStore";
 
-const CartList = ({ name, price, quantity, img }) => {
+const CartList = ({ name, price, quantity, img, id }) => {
+  const [selectedItem, setSelectedItem] = useState(false);
+  const { selectCartProduct } = useProductsStore();
+
+  const handleClick = () => {};
+
   return (
     <div className="flex h-34 bg-gray-300 mx-4 my-2 rounded-xl relative">
       <button>
@@ -11,7 +17,11 @@ const CartList = ({ name, price, quantity, img }) => {
           alt=""
         />
       </button>
-      <button>
+      <button
+        onClick={() => {
+          selectCartProduct(id);
+        }}
+      >
         <img className="mx-3" src={assets.tick} alt="" />
       </button>
       <div className="flex bg-white w-full rounded-xl">

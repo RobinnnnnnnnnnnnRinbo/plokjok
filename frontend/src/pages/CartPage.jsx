@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import NavBar from "../components/NavBar";
 import { assets } from "../assets/assets.js";
 import AnimatedList from "../components/cart-page/AnimatedList";
 import { useProductsStore } from "../stores/useProductsStore";
@@ -39,7 +38,8 @@ const CartPage = ({ setAddToCart }) => {
       <div className="h-[70vh] flex flex-col overflow-y-scroll scrollbar-hide">
         {cart.map((i) => (
           <CartList
-            key={i.id}
+            id={i.product_id}
+            key={i.product_id}
             name={i.product_name}
             price={i.price}
             quantity={i.quantity}

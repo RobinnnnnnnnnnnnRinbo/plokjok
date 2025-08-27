@@ -129,6 +129,14 @@ export const useProductsStore = create((set, get) => ({
     );
   },
 
+  selectCartProduct: (id) => {
+    console.log(id)
+    const product = get().cart.find((p) => p.product_id === id);
+    set({
+      selectedCartProduct: product || null, // Store the actual product object
+    });
+  },
+
   clearCart: () => set({ cart: [] }),
 
   log: () => {
@@ -136,5 +144,6 @@ export const useProductsStore = create((set, get) => ({
     console.log("Products:", state.products);
     console.log("Cart:", state.cart);
     console.log("Selected Product:", state.selectedProduct);
+    console.log("Selected Cart Product:", state.selectedCartProduct);
   },
 }));
