@@ -6,7 +6,24 @@ import { useProductsStore } from "../stores/useProductsStore";
 import CartList from "../components/cart-page/CartList.jsx";
 
 const CartPage = ({ setAddToCart }) => {
-  const { cart, getTotalPrice, clearCart, getTotalItems } = useProductsStore();
+  const {
+    cart,
+    getFinalTotalPrice,
+    clearCart,
+    getTotalItems,
+    finalCart,
+    setFinalCart,
+    isFinalSelected,
+  } = useProductsStore();
+
+  const allSelected =
+    cart.length > 0 && cart.every((item) => isFinalSelected(item.product_id));
+
+  const handleSelectAll = (checked) => {
+    cart.forEach((item) => {
+      setFinalCart(item.product_id, checked);
+    });
+  };
   return (
     <div className="h-screen bg-gray-100">
       <div className="flex justify-between items-center p-6">
@@ -25,8 +42,14 @@ const CartPage = ({ setAddToCart }) => {
       </div>
       <div className="flex justify-between px-6 mb-3">
         <div>
-          <input type="checkbox" />
-          <label htmlFor=""> Select All</label>
+          <input
+            type="checkbox"
+            checked={allSelected}
+            onChange={(event) => {
+              handleSelectAll(event.target.checked);
+            }}
+          />
+          <label htmlFor="">Select All</label>
         </div>
         <button
           className="bg-red-500 text-white p-2 rounded"
@@ -40,23 +63,30 @@ const CartPage = ({ setAddToCart }) => {
           <CartList
             id={i.product_id}
             key={i.product_id}
+            isChecked={isFinalSelected(i.product_id)}
             name={i.product_name}
             price={i.price}
             quantity={i.quantity}
             img={i.img_url}
+            onCheckboxChange={(checked) => setFinalCart(i.product_id, checked)}
           />
         ))}
       </div>
       <div className="flex fixed bottom-0 left-0 right-0 justify-between items-center px-4 py-2 bg-white shadow-md">
         <span className="text-lg font-semibold">
-          Total: ${getTotalPrice().toFixed(2)}
+          Total: ${getFinalTotalPrice().toFixed(2)}
         </span>
 
         <button
           onClick={() => setAddToCart(true)}
-          className="bg-pm text-white py-2 px-4 rounded"
+          disabled={finalCart.length === 0}
+          className={`py-2 px-4 rounded ${
+            finalCart.length === 0
+              ? `bg-gray-400 cursor-not-allowed`
+              : `bg-pm hover:bg-pmhover`
+          } text-white`}
         >
-          Checkout
+          Checkout ({finalCart.length})
         </button>
       </div>
     </div>

@@ -10,6 +10,7 @@ const connectDBDebug = debug("database:connect_database");
 
 import productRoute from "./routes/productRoute.js";
 import userRoute from "./routes/userRoute.js";
+import ordersRoute from "./routes/ordersRoute.js";
 import { pool } from "./database/db.js";
 import { createTables } from "./database/schema.js";
 
@@ -51,6 +52,7 @@ app.use(morgan("dev"));
 
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
+app.use("/api/orders", ordersRoute);
 
 const connectDB = async () => {
   try {

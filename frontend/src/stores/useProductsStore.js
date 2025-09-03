@@ -4,6 +4,7 @@ import axios from "axios";
 export const useProductsStore = create((set, get) => ({
   products: [],
   cart: [],
+  finalCart: [],
   loading: null,
   error: null,
   selectedProduct: null,
@@ -97,45 +98,60 @@ export const useProductsStore = create((set, get) => ({
       }
     }),
 
-  removeFromCart: (productId) =>
-    set((state) => ({
-      cart: state.cart.filter((item) => item.product_id !== productId),
-    })),
-
+   removeFromCart: (productId) =>
+    set((state) => {
+      const nextCart = state.cart.filter((item) => item.product_id !== productId);
+      const nextFinal = state.finalCart.filter((it) => it.product_id !== productId);
+      return { cart: nextCart, finalCart: nextFinal };
+    }),
   updateQuantity: (productId, quantity) =>
     set((state) => {
       if (quantity <= 0) {
-        return {
-          cart: state.cart.filter((item) => item.product_id !== productId),
-        };
+        const nextCart = state.cart.filter((it) => it.product_id !== productId);
+        const nextFinal = state.finalCart.filter((it) => it.product_id !== productId);
+        return { cart: nextCart, finalCart: nextFinal };
       }
-      return {
-        cart: state.cart.map((item) =>
-          item.product_id === productId ? { ...item, quantity } : item
-        ),
-      };
+      const nextCart = state.cart.map((it) =>
+        it.product_id === productId ? { ...it, quantity } : it
+      );
+      const isSelected = state.finalCart.some((it) => it.product_id === productId);
+      const nextFinal = isSelected
+        ? state.finalCart.map((it) =>
+            it.product_id === productId ? { ...it, quantity } : it
+          )
+        : state.finalCart;
+      return { cart: nextCart, finalCart: nextFinal };
     }),
-
   getTotalItems: () => {
     const state = get();
     return state.cart.reduce((total, item) => total + item.quantity, 0);
   },
 
-  getTotalPrice: () => {
-    const state = get();
-    return state.cart.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
+   getFinalTotalPrice: () => {
+    const { finalCart } = get();
+    return finalCart.reduce((t, it) => t + it.price * it.quantity, 0);
   },
+
+
 
   selectCartProduct: (id) => {
     console.log(id)
     const product = get().cart.find((p) => p.product_id === id);
     set({
-      selectedCartProduct: product || null, // Store the actual product object
+      selectedCartProduct: product || null
     });
   },
+  isFinalSelected: (productId) => {
+    return get().finalCart.some((it) => it.product_id === productId);
+  }, 
+  setFinalCart: (productId, selected) =>
+    set((state) => {
+      const itemInCart = state.cart.find((it) => it.product_id === productId);
+      // always start by removing it; add back if selected
+      let nextFinal = state.finalCart.filter((it) => it.product_id !== productId);
+      if (selected && itemInCart) nextFinal = [...nextFinal, itemInCart];
+      return { finalCart: nextFinal };
+    }),
 
   clearCart: () => set({ cart: [] }),
 
@@ -145,5 +161,6 @@ export const useProductsStore = create((set, get) => ({
     console.log("Cart:", state.cart);
     console.log("Selected Product:", state.selectedProduct);
     console.log("Selected Cart Product:", state.selectedCartProduct);
+    console.log("Final Cart:", state.finalCart);
   },
 }));

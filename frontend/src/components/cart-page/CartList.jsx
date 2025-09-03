@@ -1,28 +1,57 @@
-import React, { useState } from "react";
+import React from "react";
 import { assets } from "../../assets/assets";
 import { useProductsStore } from "../../stores/useProductsStore";
 
-const CartList = ({ name, price, quantity, img, id }) => {
-  const [selectedItem, setSelectedItem] = useState(false);
-  const { selectCartProduct } = useProductsStore();
+const CartList = ({
+  name,
+  price,
+  quantity,
+  img,
+  id,
+  isChecked,
+  onCheckboxChange,
+}) => {
+  const { selectCartProduct, log, removeFromCart, updateQuantity } =
+    useProductsStore();
 
-  const handleClick = () => {};
+  const handleToggleSelect = () => {
+    onCheckboxChange(!isChecked);
+    selectCartProduct(id);
+    log();
+  };
+
+  const handleQuantityChange = (e) => {
+    const newQuantity = parseInt(e.target.value) || 1;
+    updateQuantity(id, newQuantity);
+  };
+
+  const handleRemove = () => {
+    removeFromCart(id);
+  };
 
   return (
-    <div className="flex h-34 bg-gray-300 mx-4 my-2 rounded-xl relative">
-      <button>
+    <div
+      className={`flex h-34 ${
+        isChecked ? `bg-pm` : `bg-gray-300`
+      } mx-4 my-2 rounded-xl relative`}
+    >
+      <button
+        onClick={() => {
+          handleRemove();
+        }}
+      >
         <img
           className="absolute top-4 right-4 h-7"
           src={assets.delete}
           alt=""
         />
       </button>
-      <button
-        onClick={() => {
-          selectCartProduct(id);
-        }}
-      >
-        <img className="mx-3" src={assets.tick} alt="" />
+      <button onClick={handleToggleSelect}>
+        <img
+          className="mx-3"
+          src={isChecked ? assets.white_tick : assets.tick}
+          alt=""
+        />
       </button>
       <div className="flex bg-white w-full rounded-xl">
         <div>
@@ -37,7 +66,9 @@ const CartList = ({ name, price, quantity, img, id }) => {
           <label htmlFor="">Quantity:</label>
           <input
             className="w-16 text-center bg-gray-100 rounded-md ml-2 outline-none"
-            value={quantity}
+            defaultValue={quantity}
+            onChange={handleQuantityChange}
+            onBlur={handleQuantityChange}
             type="text"
             name=""
             id=""
