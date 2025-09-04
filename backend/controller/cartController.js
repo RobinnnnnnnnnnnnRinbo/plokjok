@@ -25,3 +25,19 @@ try {
         res.status(500).json({ error: "Internal server error" })
   }
 }
+
+export const addCartItem = async (req, res) => {
+  const { cart_id } = req.params
+  const { product_id, quantity } = req.body
+
+  try {
+    const result = await pool.query(
+      "INSERT INTO cart_items (cart_id, product_id, quantity) VALUES ($1, $2, $3) RETURNING *",
+      [cart_id, product_id, quantity]
+    )
+    res.status(201).json(result.rows[0])
+  } catch (error) {
+    console.error("Error adding cart item:", error)
+    res.status(500).json({ error: "Internal server error" })
+  }
+}
