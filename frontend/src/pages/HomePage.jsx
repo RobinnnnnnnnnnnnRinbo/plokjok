@@ -1,12 +1,34 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import HeroSection from "../components/HeroSection";
 import Category from "../components/Category";
 import Brand from "../components/Brand";
 import Footer from "../components/Footer";
 import ProductList from "../components/ProductList";
+import { useProductsStore } from "../stores/useProductsStore";
 
-const HomePage = ({ cartCount, handleAddToCart, setSelectedProduct }) => {
+const HomePage = ({ cartCount, handleAddToCart }) => {
+  const { initializeCart, fetchCart, currentCartId } = useProductsStore();
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadCart = async () => {
+      if (!currentCartId && isMounted) {
+        const cartId = await initializeCart();
+        if (cartId && isMounted) {
+          await fetchCart();
+        }
+      }
+    };
+
+    loadCart();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const categoryRef = useRef();
   const productRef = useRef();
   const heroRef = useRef();
@@ -24,7 +46,6 @@ const HomePage = ({ cartCount, handleAddToCart, setSelectedProduct }) => {
       <Category ref={categoryRef} />
       <Brand />
       <ProductList
-        setSelectedProduct={setSelectedProduct}
         handleAddToCart={handleAddToCart}
         cartCount={cartCount}
         ref={productRef}

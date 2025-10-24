@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets.js"; // Adjust the path as necessary
-import { useProductsStore } from "../stores/useProductsStore.js";
 import { useAuthStore } from "../stores/useAuthStore.js";
 
 const TS_BREAKPOINT = 810;
@@ -10,7 +9,6 @@ const TL_BREAKPOINT = 1024;
 const NavBar = ({ productRef, categoryRef, heroRef, aboutRef }) => {
   const [isSearch, setIsSearch] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const { getTotalItems, log } = useProductsStore();
 
   const { authUser } = useAuthStore();
 
@@ -29,10 +27,6 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef }) => {
     const drawerCheckbox = document.getElementById("my-drawer");
     if (drawerCheckbox) drawerCheckbox.checked = false;
   };
-
-  function handleCartClick() {
-    log();
-  }
 
   return (
     <div className="flex justify-center ">
@@ -178,23 +172,14 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef }) => {
             />
           )}
           <div className="relative">
-            <div className="absolute h-5 w-5 flex items-center justify-center text-[11px] font-bold text-white rounded-full bg-red-500 -top-1 -right-1">
-              {getTotalItems()}
-            </div>
+            <div className="absolute h-5 w-5 flex items-center justify-center text-[11px] font-bold text-white rounded-full bg-red-500 -top-1 -right-1"></div>
             <Link to={"/cart"}>
-              <img
-                onClick={() => handleCartClick()}
-                type="button"
-                className="h-7"
-                src={assets.cartM}
-                alt=""
-              />
+              <img type="button" className="h-7" src={assets.cartM} alt="" />
             </Link>
           </div>
           <Link to={`${authUser?.is_auth ? `/profile` : `/login`}`}>
             <img
               type="button"
-              onClick={log()}
               className={`h-7 w-7 ${
                 authUser?.is_auth ? `bg-gray-300 rounded-full border` : null
               }`}

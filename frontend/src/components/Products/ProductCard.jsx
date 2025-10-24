@@ -22,7 +22,7 @@ const ProductCard = ({ name, price, img, item, description }) => {
               log();
             }}
             src={img}
-            alt="Fresh watermelon cut in half showing red flesh"
+            alt={`${name} Image`}
             className="w-36 h-36 object-contain"
           />
         </Link>

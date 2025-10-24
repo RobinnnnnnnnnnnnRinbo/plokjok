@@ -10,7 +10,11 @@ const ProductGrid = ({ products, loading, error, setSelectedProduct }) => {
         {products.length === 0 && !error && !loading && (
           <span>Product not found</span>
         )}
-        {error && <span>{error}</span>}
+        {error && (
+          <span className="text-red-500 absolute flex items-center justify-center w-full bg-white h-10">
+            {error}
+          </span>
+        )}
         {products.map((product, index) => (
           <ProductCard
             item={product}

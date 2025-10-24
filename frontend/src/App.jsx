@@ -25,7 +25,7 @@ const App = () => {
 
   useEffect(() => {
     setAuthUserFromStorage();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const router = createBrowserRouter([
     {
