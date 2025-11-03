@@ -19,7 +19,7 @@ const ProductDetail = (cartCount) => {
   }
 
   return (
-    <div className="bg-white h-screen flex flex-col gap-8">
+    <div className="bg-white h-screen pb-64 flex flex-col gap-8">
       <NavBar cartCount={cartCount} />
       <div className="flex flex-col h-full gap-8 mt-18">
         <div className="h-[40vh] bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center mx-4">

@@ -57,16 +57,18 @@ const CartPage = ({ setAddToCart }) => {
       <div className="flex fixed bottom-0 left-0 right-0 justify-between items-center px-4 py-2 bg-white shadow-md">
         <span className="text-lg font-semibold">Total: $</span>
 
-        <button
-          onClick={() => setAddToCart(true)}
-          className={`py-2 px-4 rounded ${
-            cart.length === 0
-              ? `bg-gray-400 cursor-not-allowed`
-              : `bg-pm hover:bg-pmhover`
-          } text-white`}
-        >
-          Checkout ({cart.length})
-        </button>
+        <Link to={"/checkout"}>
+          <button
+            onClick={() => setAddToCart(true)}
+            className={`py-2 px-4 rounded ${
+              cart.length === 0
+                ? `bg-gray-400 cursor-not-allowed`
+                : `bg-pm hover:bg-pmhover`
+            } text-white`}
+          >
+            Checkout ({cart.length})
+          </button>
+        </Link>
       </div>
     </div>
   );
