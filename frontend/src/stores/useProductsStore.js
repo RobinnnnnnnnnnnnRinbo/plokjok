@@ -2,6 +2,8 @@ import { create } from "zustand";
 import { useAuthStore } from "./useAuthStore";
 import axios from "axios";
 
+const APIURL = "http://192.168.1.7:3000"
+
 export const useProductsStore = create((set, get) => ({
   products: [],
   cart: [],
@@ -14,9 +16,10 @@ export const useProductsStore = create((set, get) => ({
   //PRODUCT DETAILS
 
   fetchProducts: async () => {
+    console.log(`Fetching products from ${APIURL}`);
     set({ loading: true, error: null });
     try {
-      const res = await axios.get(`http://192.168.0.172:3000/api/products`);
+      const res = await axios.get(`${APIURL}/api/products`);
       set({
         products: res.data,
         loading: false,
@@ -42,7 +45,7 @@ export const useProductsStore = create((set, get) => ({
     set({ loading: true, error: null });
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/products",
+        `${APIURL}/api/products`,
         productData
       );
       set((state) => ({
@@ -63,7 +66,7 @@ export const useProductsStore = create((set, get) => ({
     set({ loading: true, error: null });
     try {
       const res = await axios.put(
-        "http://localhost:3000/api/products/:id",
+        `${APIURL}/api/products/:id`,
         productData
       );
       set((state) => ({
@@ -84,6 +87,7 @@ export const useProductsStore = create((set, get) => ({
   //CART DETAILS
 
   initializeCart: async () => {
+    
     if (get().currentCartId) {
     console.log("Cart already initialized:", get().currentCartId);
     return get().currentCartId;
@@ -99,11 +103,11 @@ export const useProductsStore = create((set, get) => ({
   try {
     let res;
     try {
-      res = await axios.get(`http://192.168.0.172:3000/api/carts/user/${authUser.user_id}`);
+      res = await axios.get(`${APIURL}/api/carts/user/${authUser.user_id}`);
       console.log("Found existing cart:", res.data.cart_id);
     } catch (error) {
       if (error.response?.status === 404) {
-        res = await axios.post(`http://192.168.0.172:3000/api/carts/user/${authUser.user_id}`);
+        res = await axios.post(`${APIURL}/api/carts/user/${authUser.user_id}`);
         console.log("Created new cart:", res.data.cart_id);
       } else {
         throw error;
@@ -134,7 +138,7 @@ export const useProductsStore = create((set, get) => ({
     set({ loading: true, error: null });
     try {
       const res = await axios.get(
-        `http://192.168.0.172:3000/api/carts/${cartId}/items`
+        `${APIURL}/api/carts/${cartId}/items`
       );
       set({
         cart: res.data,
@@ -182,7 +186,7 @@ export const useProductsStore = create((set, get) => ({
     }
 
     try {
-      await axios.post(`http://192.168.0.172:3000/api/carts/${cartId}/items`, {
+      await axios.post(`${APIURL}/api/carts/${cartId}/items`, {
         product_id: product.product_id,
         quantity: quantity
       });

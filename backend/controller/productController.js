@@ -1,3 +1,4 @@
+import { colgroup } from "motion/react-client";
 import { pool } from "../database/db.js";
 import debug from "debug";
 
@@ -8,8 +9,14 @@ export const getProducts = async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM products");
     res.status(200).json(result.rows);
+
+    if (result.rows.length === 0) {
+      console.log("No products found in the database.");
+    } else {
+      createProductDebug(`Fetched ${result.rows.length} products.`);
+    }
   } catch (error) {
-    createProductDebug("Error fetching products:", error);
+    console.error("Error fetching products:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };

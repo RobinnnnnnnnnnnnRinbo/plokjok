@@ -15,7 +15,7 @@ export const createTables = async (pool) => {
     //   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     // )`,
 
-    // // Users table
+    // // // Users table
     // `CREATE TABLE IF NOT EXISTS users (
     //   user_id SERIAL PRIMARY KEY,
     //   username VARCHAR(50) UNIQUE NOT NULL,
@@ -25,7 +25,7 @@ export const createTables = async (pool) => {
     //   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     // )`,
 
-    // // Orders table
+    // // // Orders table
     // `CREATE TABLE IF NOT EXISTS orders (
     //   order_id SERIAL PRIMARY KEY,
     //   user_id INT REFERENCES users(user_id),
@@ -34,7 +34,7 @@ export const createTables = async (pool) => {
     //   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     // )`,
 
-    // // Order items table
+    // // // Order items table
     // `CREATE TABLE IF NOT EXISTS order_items (
     //   item_id SERIAL PRIMARY KEY,
     //   order_id INT REFERENCES orders(order_id),
@@ -43,7 +43,7 @@ export const createTables = async (pool) => {
     //   price NUMERIC(10, 2) NOT NULL
     // )`,
 
-    // // Categories table
+    // // // Categories table
     // `CREATE TABLE IF NOT EXISTS categories (
     //   category_id SERIAL PRIMARY KEY,
     //   category_name VARCHAR(50) UNIQUE NOT NULL,

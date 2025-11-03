@@ -2,19 +2,23 @@ import { useState, useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Importing components and pages
-import HomePage from "./pages/HomePage.jsx";
-import CartPage from "./pages/CartPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
-import ProductDetail from "./pages/ProductDetail.jsx";
 import LogIn from "./pages/LogIn.jsx";
 import SignUp from "./pages/SignUp.jsx";
-import ProductsAdmin from "./pages/admin/ProductsAdmin.jsx";
+import HomePage from "./pages/HomePage.jsx";
+
+import CartPage from "./pages/CartPage.jsx";
+import ProductDetail from "./pages/ProductDetail.jsx";
 import EditProduct from "./pages/admin/EditProduct.jsx";
+import CheckOut from "./pages/CheckOut.jsx";
+
+import ProductsAdmin from "./pages/admin/ProductsAdmin.jsx";
 import AdminPage from "./pages/admin/AdminPage.jsx";
 import CreateProduct from "./pages/admin/CreateProduct.jsx";
 
 import { useAuthStore } from "./stores/useAuthStore.js";
 import UserProfile from "./pages/UserProfile.jsx";
+import SettingPage from "./pages/SettingPage.jsx";
 
 const App = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -45,8 +49,16 @@ const App = () => {
       element: <CartPage selectedProduct={selectedProduct} />,
     },
     {
+      path: "/checkout",
+      element: <CheckOut />,
+    },
+    {
       path: "/signup",
       element: <SignUp />,
+    },
+    {
+      path: "/settings",
+      element: <SettingPage />,
     },
 
     {

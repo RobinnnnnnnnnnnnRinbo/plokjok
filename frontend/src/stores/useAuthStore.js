@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import axios from "axios";
 
+const APIURL = "http://192.168.1.7:3000";
+
 export const useAuthStore = create((set, get) => ({
   users: [],
   loading: null,
@@ -10,7 +12,7 @@ export const useAuthStore = create((set, get) => ({
   fetchUsers: async () => {
     try {
       set({ loading: true, error: null });
-      const res = await axios.get("http://192.168.0.172:3000/api/users");
+      const res = await axios.get(`${APIURL}/api/users`);
       set({ users: res.data, loading: false, error: null });
     } catch (error) {
       set({
@@ -31,7 +33,7 @@ export const useAuthStore = create((set, get) => ({
     try {
       set({ loading: true, error: null });
       const res = await axios.post(
-        "http://192.168.0.172:3000/api/users/register",
+        `${APIURL}/api/users/register`,
         userData
       );
       set((state) => ({
