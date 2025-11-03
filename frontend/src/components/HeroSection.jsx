@@ -6,7 +6,10 @@ const HeroSection = React.forwardRef((props, ref) => {
   return (
     <div
       ref={ref}
-      className="pt-18 text-white h-screen bg-black flex flex-col items-center gap-12"
+      className="pt-18 bg-cover text-white h-screen bg-pm flex flex-col items-center gap-12"
+      style={{
+        backgroundImage: `url(${assets.background_gred_profile})`,
+      }}
     >
       <div className="border rounded-full px-8 p-2 mt-12">New Arrival</div>
       <div className="flex items-end bg-gray-700 rounded-xl border backdrop-blur-sm justify-center m-4">

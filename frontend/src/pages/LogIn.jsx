@@ -25,7 +25,6 @@ const LogIn = () => {
 
   const formRef = useRef();
 
-  // Scroll to top when any input loses focus
   const handleBlur = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -85,7 +84,12 @@ const LogIn = () => {
           Back
         </button>
       </Link>
-      <div className="bg-pm min-h-[35vh] w-full flex flex-col justify-center items-center rounded-b-[12vh]">
+      <div
+        className="bg-pm bg-cover min-h-[35vh] w-full flex flex-col justify-center items-center rounded-b-[12vh]"
+        style={{
+          backgroundImage: `url(${assets.background_gred_profile})`,
+        }}
+      >
         <span className="text-2xl pt-18 font-extrabold text-white">
           Welcome back,
         </span>

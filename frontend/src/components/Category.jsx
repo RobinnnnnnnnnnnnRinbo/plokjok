@@ -46,7 +46,7 @@ const Category = React.forwardRef((props, ref) => {
             src={assets.hpcateg}
             alt=""
           />
-          <span className="mb-4">Nukes</span>
+          <span className="mb-4">Headphones</span>
         </div>
       </div>
     </div>

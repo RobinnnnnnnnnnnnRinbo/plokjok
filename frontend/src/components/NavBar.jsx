@@ -181,9 +181,9 @@ const NavBar = ({ productRef, categoryRef, heroRef, aboutRef }) => {
             <img
               type="button"
               className={`h-7 w-7 ${
-                authUser?.is_auth ? `bg-gray-300 rounded-full border` : null
+                authUser?.is_auth ? `bg-gray-300 rounded-full` : null
               }`}
-              src={authUser?.is_auth ? assets.default : assets.userM}
+              src={authUser?.is_auth ? assets.blank_profile : assets.userM}
               alt="profile"
             />
           </Link>

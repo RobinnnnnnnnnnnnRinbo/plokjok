@@ -129,7 +129,12 @@ const SignUp = () => {
           Back
         </button>
       </Link>
-      <div className="bg-pm min-h-[30vh] w-full flex flex-col justify-center items-center rounded-b-[12vh]">
+      <div
+        className="bg-pm min-h-[30vh] w-full flex flex-col justify-center items-center rounded-b-[12vh] bg-cover"
+        style={{
+          backgroundImage: `url(${assets.background_gred_profile})`,
+        }}
+      >
         <span className="text-2xl pt-18 font-extrabold text-white">
           Create an account
         </span>
