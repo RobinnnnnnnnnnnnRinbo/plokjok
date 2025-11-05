@@ -1,10 +1,10 @@
-import {pool} from "../database/db.js"
+import {supabase} from "../database/db.js"
 
 export const getCarts = async (req, res) => {
   const { user_id } = req.params;
   try {
 
-    let result = await pool.query("SELECT * FROM carts WHERE user_id = $1", [user_id]);
+    let result = await supabase.query("SELECT * FROM carts WHERE user_id = $1", [user_id]);
     
     if (result.rows.length === 0) {
       res.status(404).json({ error: "Cart not found" });
@@ -20,7 +20,7 @@ export const getCarts = async (req, res) => {
 export const createCart = async (req, res) => {
   const { user_id } = req.params;
   try {
-    const result = await pool.query(`
+    const result = await supabase.query(`
       INSERT INTO carts (user_id) 
       VALUES ($1) 
       ON CONFLICT (user_id) DO NOTHING 
@@ -28,7 +28,7 @@ export const createCart = async (req, res) => {
     `, [user_id]);
 
     if (result.rows.length === 0) {
-      const existingCart = await pool.query(
+      const existingCart = await supabase.query(
         "SELECT * FROM carts WHERE user_id = $1", 
         [user_id]
       );
@@ -45,7 +45,7 @@ export const createCart = async (req, res) => {
 export const getCartItems = async (req, res) => {
   const { cart_id } = req.params
 try { 
-    const result = await pool.query(
+    const result = await supabase.query(
       "SELECT ci.cart_item_id, ci.quantity, ci.created_at, p.product_id, p.product_name, p.price, p.img_url FROM cart_items ci JOIN products p ON ci.product_id = p.product_id WHERE ci.cart_id = $1",
       [cart_id]
     );
@@ -61,7 +61,7 @@ export const addCartItem = async (req, res) => {
   const { product_id, quantity } = req.body;
   
   try {
-    const result = await pool.query(`
+    const result = await supabase.query(`
       INSERT INTO cart_items (quantity, cart_id, product_id) 
       VALUES ($1, $2, $3)
       ON CONFLICT (cart_id, product_id) 

@@ -1,8 +1,8 @@
-import { pool } from "../database/db.js"
+import { supabase } from "../database/db.js"
 
 export const getOrders = async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM orders")
+    const result = await supabase.query("SELECT * FROM orders")
     res.json(result.rows[0])
   } catch (error) {
     console.error("Error fetching orders:", error)
@@ -12,7 +12,7 @@ export const getOrders = async (req, res) => {
 export const getOrdersItem = async (req, res) => {
   const { order_id } = req.params
   try {
-    const result = await pool.query(
+    const result = await supabase.query(
       "SELECT * FROM order_items WHERE order_id = $1",
       [order_id]
     )
