@@ -25,6 +25,7 @@
   "dependencies": {
     "@arcjet/inspect": "^1.0.0-beta.10",
     "@arcjet/node": "^1.0.0-beta.10",
+    "@supabase/supabase-js": "^2.79.0",
     "axios": "^1.11.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
@@ -35,6 +36,7 @@
     "morgan": "^1.10.0",
     "motion": "^12.23.24",
     "pg": "^8.16.3",
+    "postgres": "^3.4.7",
     "react-loading-skeleton": "^3.5.0",
     "react-router-dom": "^7.6.3",
     "vite": "^7.1.12",
