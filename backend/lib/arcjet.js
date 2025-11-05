@@ -1,9 +1,10 @@
 import arcjet, { tokenBucket, detectBot, shield } from "@arcjet/node";
+import { isSpoofedBot } from "@arcjet/inspect";
 
 import "dotenv/config";
 
 const aj = arcjet({
-  apiKey: process.env.ARCJET_API_KEY,
+  apiKey: process.env.ARCJET_KEY,
   characteristics: ["ip.src"],
   rules: [
     shield({ mode: "LIVE" }),
