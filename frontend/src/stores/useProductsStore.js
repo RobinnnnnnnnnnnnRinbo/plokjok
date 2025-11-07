@@ -171,7 +171,7 @@ export const useProductsStore = create((set, get) => ({
 
       return { cart: updatedCart };
     });
-
+    
     get().syncAddToCart(product, quantity);
   },
 
@@ -196,6 +196,8 @@ export const useProductsStore = create((set, get) => ({
     }
   },
 
+  
+
   log: () => {
     const state = get();
     console.log("Products:", state.products);
@@ -203,5 +205,6 @@ export const useProductsStore = create((set, get) => ({
     console.log("Selected Product:", state.selectedProduct);
     console.log("Selected Cart Product:", state.selectedCartProduct);
     console.log("Final Cart:", state.finalCart);
+    console.log("Cart count:", state.cart.length);
   },
 }));

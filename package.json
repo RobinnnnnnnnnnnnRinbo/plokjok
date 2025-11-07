@@ -8,7 +8,7 @@
     "server": "nodemon backend/server.js",
     "client": "cd frontend && npm run dev -- --host",
     "build": "react-scripts build",
-    "web": "concurrently \"npm run server\" \"npm run client\""
+    "web": "concurrently DEBUG=*app \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",

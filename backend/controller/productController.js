@@ -49,7 +49,7 @@ export const getProductById = async (req, res) => {
 };
 
 export const createProduct = async (req, res) => {
-  const { product_name, price, img_url, description, stock, category } = req.body;
+  const { product_name, price, img_url, description, stock, category_id } = req.body;
   
   if (!product_name || !price || !stock) {
     return res.status(400).json({ error: "Name, price and stock are required" });
@@ -64,7 +64,7 @@ export const createProduct = async (req, res) => {
         img_url, 
         description, 
         stock, 
-        category 
+        category_id 
       }])
       .select()
       .single();
